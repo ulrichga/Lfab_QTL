@@ -31,7 +31,10 @@ foo <- barplot(t(means)[c("n_daughters", "n_sons"),], ylim=c(0,12), beside=T, yl
 legend("topright",legend=c("daughters","sons"), pch=22, pt.bg=c("gray20","gray80"), pt.cex=2, bty="n")
 arrows(x0=foo,y0=t(means)+t(sems),y1=t(means)-t(sems),angle=90,code=3,length=0.1)
 
-#    Output mean offspring barplot as PDF
+#    Output mean offspring barplot as PDF but first make sure the ./results/ folder is actually there
+if(!("./results" %in% list.dirs("."))){
+  dir.create("./results")
+}
 pdf("./results/dominance_offspringbarplot.pdf")
 barplot(t(means)[c("n_daughters", "n_sons"),], ylim=c(0,12), beside=T) # barplot mean offspring numbers
 legend("topright",legend=c("daughters","sons"), pch=22, pt.bg=c("gray20","gray80"), pt.cex=2, bty="n")
