@@ -1,0 +1,13 @@
+# Exclude hidden R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rproj
+
+# Exclude reference directories
+data/
+results/
+
+# Exclude file with local paths
+paths.txt
