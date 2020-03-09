@@ -1,0 +1,21 @@
+#!/bin/bash
+#BSUB -J "summarize_insertsize"
+#BSUB -R "rusage[mem=8000]"
+#BSUB -n 1
+#BSUB -W 2:00
+
+## define output-dierctory.
+out="./results/mapped/"
+
+## Load samtools module.
+module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.9
+
+## Define sample names.
+all_samples=`cat ./results/demultiplexed/samples`
+
+## Loop through all samples, summarizing insert size average and standard deviation.
+for name in $all_samples
+do
+samtools stats ${out}samplesQ10/${name}_Q10.sort.bam | grep "insert size average" >> ${out}samplesQ10/insertsize_avg.txt
+samtools stats ${out}samplesQ10/${name}_Q10.sort.bam | grep "insert size standard deviation:" >> ${out}samplesQ10/insertsize_sd.txt
+done

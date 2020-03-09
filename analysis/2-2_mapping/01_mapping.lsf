@@ -1,0 +1,54 @@
+#!/bin/bash
+#BSUB -J "BWA_all[1-384]%24"
+#BSUB -R "rusage[mem=3000]"
+#BSUB -n 1
+#BSUB -W 6:00
+#BSUB -R "rusage[scratch=3000]"
+
+
+## Define paths.
+in="./results/demultiplexed/"
+Ref="./data/genome/Lf_genome_V1.0.fa"
+out="./results/mapped/"
+
+## Set the number of processors per Job.
+cpu=2
+
+## Set mapping Quality.
+Qual=10
+
+## Load necessary modules.
+module load gcc/4.8.2 gdc bwa/0.7.17
+module load gcc/4.8.2 gdc sambamba/0.6.8
+module load gcc/4.8.2 gdc bedtools/2.28.0
+
+## Set the number of threads to use.
+export OMP_NUM_THREADS=2
+
+## Make sure there are appropriate output folders.
+if [ ! -e ${out}stats ]  ; then mkdir ${out}stats ; fi
+if [ ! -e ${out}statsQ${Qual} ]  ; then mkdir ${out}statsQ${Qual} ; fi
+if [ ! -e ${out}samples ]  ; then mkdir ${out}samples ; fi
+if [ ! -e ${out}samplesQ${Qual} ]  ; then mkdir ${out}samplesQ${Qual} ; fi
+
+## Use the internal job variable (LSB_JOBINDEX) to name samples.
+IDX=$LSB_JOBINDEX
+name=`sed -n ${IDX}p <${in}samples`
+
+## Map paired-end reads using default parameters and output samfile to TMPDIR.
+bwa mem ${Ref} ${in}${name}.1.fq.gz ${in}${name}.2.fq.gz -R "@RG\tID:${name}\tSM:${name}\tPL:Illumina" -t ${cpu} > ${TMPDIR}/${name}.sam
+
+## Convert samfile to bamfile, sort it and output to samples folder.
+sambamba view -t ${cpu} -S ${TMPDIR}/${name}.sam -f bam -l 0 -o /dev/stdout|sambamba sort /dev/stdin -o /dev/stdout -t ${cpu} -m 4GB --tmpdir ${TMPDIR} > ${out}samples/${name}.sort.bam
+
+## Get mapping statistics of the sorted bamfiles and output to stats folder.
+sambamba flagstat ${out}samples/${name}.sort.bam > ${out}stats/${name}_stat
+
+## Apply a quality filter to the sorted bamfiles to remove low quality reads and output to the samplesQ folder.
+sambamba view -F "mapping_quality >= "${Qual} ${out}samples/${name}.sort.bam -o ${out}samplesQ${Qual}/${name}_Q${Qual}.sort.bam -t ${cpu} -f bam
+
+## Get mapping statistics of the sorted and quality filtered bamfiles and output to statsQ folder.
+sambamba flagstat ${out}samplesQ${Qual}/${name}_Q${Qual}.sort.bam > ${out}statsQ${Qual}/${name}_stat_Q${Qual}
+
+## Get coverage info.
+bedtools genomecov -bga -ibam ${out}samplesQ${Qual}/${name}_Q10.sort.bam > ${out}/coverage/${name}_cov

@@ -12,5 +12,6 @@ results/
 # Exclude file with local paths
 paths.txt
 
-# Exclude the indev file that contains code that was used for constructing procedures
+# Exclude the devnotes files that contain code for constructing procedures
 analysis/2-1_demultiplex/devnotes
+analysis/2-2_mapping/devnotes

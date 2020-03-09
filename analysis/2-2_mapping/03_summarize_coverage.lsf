@@ -1,0 +1,65 @@
+#!/bin/bash
+#BSUB -J "summarize_coverage"
+#BSUB -R "rusage[mem=1000]"
+#BSUB -n 1
+#BSUB -W 2:00
+
+## define output-dierctory.
+out="./results/mapped/"
+
+## Load bedtools module.
+module load gcc/4.8.2 gdc bedtools/2.28.0
+
+## Define sample names.
+all_samples=`cat ./results/demultiplexed/samples`
+
+## loop through samples producing output for coverage >= 3, 6, 10, 15
+## Genomic regions with a coverage >= 3 / 6 / 10 / 15 that are between 150 bp and 500 bp in size are considered the same ddRAD locus.
+## The intervals that are counted here approximate sequenced ddRAD loci.
+for name in $all_samples
+do
+awk '$4 > 3' ${out}coverage/${name}_cov | awk '{print $1 "\t" $2 "\t" $3}' > ${out}coverage/${name}_cov3
+bedtools merge -i ${out}coverage/${name}_cov3 -d 500 > ${out}intervals/${name}_intervals_cov3
+awk '($3-$2) > 150 && ($3-$2) < 500' ${out}intervals/${name}_intervals_cov3 > ${out}filtered_intervals/${name}_filtered_intervals_cov3
+awk '$4 > 6' ${out}coverage/${name}_cov | awk '{print $1 "\t" $2 "\t" $3}' > ${out}coverage/${name}_cov6
+bedtools merge -i ${out}coverage/${name}_cov6 -d 500 > ${out}intervals/${name}_intervals_cov6
+awk '($3-$2) > 150 && ($3-$2) < 500' ${out}intervals/${name}_intervals_cov6 > ${out}filtered_intervals/${name}_filtered_intervals_cov6
+awk '$4 > 10' ${out}coverage/${name}_cov | awk '{print $1 "\t" $2 "\t" $3}' > ${out}coverage/${name}_cov10
+bedtools merge -i ${out}coverage/${name}_cov10 -d 500 > ${out}intervals/${name}_intervals_cov10
+awk '($3-$2) > 150 && ($3-$2) < 500' ${out}intervals/${name}_intervals_cov10 > ${out}filtered_intervals/${name}_filtered_intervals_cov10
+awk '$4 > 15' ${out}coverage/${name}_cov | awk '{print $1 "\t" $2 "\t" $3}' > ${out}coverage/${name}_cov15
+bedtools merge -i ${out}coverage/${name}_cov15 -d 500 > ${out}intervals/${name}_intervals_cov15
+awk '($3-$2) > 150 && ($3-$2) < 500' ${out}intervals/${name}_intervals_cov15 > ${out}filtered_intervals/${name}_filtered_intervals_cov15
+done
+
+## Count the number of lines ("ddRAD loci") per file and save the output as a summary.
+cd /cluster/home/ulrichg/scratch/mapping
+wc -l ${out}filtered_intervals/*_cov3 > ${out}filtered_intervals_cov3_summary.txt
+wc -l ${out}filtered_intervals/*_cov6 > ${out}filtered_intervals_cov6_summary.txt
+wc -l ${out}filtered_intervals/*_cov10 > ${out}filtered_intervals_cov10_summary.txt
+wc -l ${out}filtered_intervals/*_cov15 > ${out}filtered_intervals_cov15_summary.txt
+
+## Summarize ddRAD loci with coverage >= 3 / 6 / 10 / 15 that are shared among in all individuals.
+for cov in 3 6 10 15
+do
+cat ${out}coverage/*cov${cov} | sort -k1,1 -k2,2n | awk '{print $1 "\t" $2 "\t" $3}'  > ${out}coverage/all_cov${cov}
+bedtools merge -i ${out}coverage/all_cov${cov} -d 500 > ${out}intervals/all_intervals_cov${cov}
+awk '($3-$2) > 150 && ($3-$2) < 500'  ${out}intervals/all_intervals_cov${cov} > ${out}filtered_intervals/all_filtered_intervals_cov${cov}
+wc -l ${out}filtered_intervals/all_filtered_intervals_cov${cov} >> ${out}filtered_intervals/shared_filtered_intervals_cov${cov}_summary.txt
+done
+
+## Summarize ddRAD loci with coverage >= 3 / 6 / 10 / 15 that are shared in at least 25% 50% 75% 90% 99% of individuals.
+## Remove all_filtered_intervals* files first from the intervals folder, otherwise we would include them in the summary.
+rm ${out}filtered_intervals/all_filtered_intervals*
+for cov in 3 6 10 15
+do
+cat ${out}filtered_intervals/*_filtered_intervals_cov${cov} | sort -k1,1 -k2,2n | awk '{print $1 "\t" $2 "\t" $3}'  > ${out}coverage/all_postfilt_cov${cov}
+bedtools merge -i ${out}coverage/all_postfilt_cov${cov} -d 500 -c 1 -o count | awk '$4 > 95' > ${out}coverage/all_postfilt_cov${cov}_ind25
+bedtools merge -i ${out}coverage/all_postfilt_cov${cov} -d 500 -c 1 -o count | awk '$4 > 191' > ${out}coverage/all_postfilt_cov${cov}_ind50
+bedtools merge -i ${out}coverage/all_postfilt_cov${cov} -d 500 -c 1 -o count | awk '$4 > 287' > ${out}coverage/all_postfilt_cov${cov}_ind75
+bedtools merge -i ${out}coverage/all_postfilt_cov${cov} -d 500 -c 1 -o count | awk '$4 > 345' > ${out}coverage/all_postfilt_cov${cov}_ind90
+bedtools merge -i ${out}coverage/all_postfilt_cov${cov} -d 500 -c 1 -o count | awk '$4 > 379' > ${out}coverage/all_postfilt_cov${cov}_ind99
+done
+
+## Count lines to summarize shared rad loci.
+wc -l ${out}coverage/all_postfilt_cov*_ind* > ${out}filtered_intervals/sharedonly_filtered_intervals_summary.txt
