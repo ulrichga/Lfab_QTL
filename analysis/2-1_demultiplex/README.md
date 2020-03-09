@@ -1,4 +1,4 @@
-###Demultiplexing###
+#Demultiplexing#
 To run this part of the analysis follow the steps described here. The analysis was executed on the Euler cluster and pulls dependencies from it. To run it on other cluster, some changes to the code may be necessary. For all the steps you should be in the Lfab_QTL directory.
 ##Step 1##
 Make sure the necessary raw data are available:
