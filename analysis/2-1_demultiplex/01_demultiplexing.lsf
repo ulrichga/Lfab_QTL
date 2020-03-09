@@ -1,0 +1,16 @@
+#!/bin/bash
+#BSUB -J "demultiplex_deg[1-6, 9-14]%6"
+#BSUB -W 4:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=6000]"
+#BSUB -o log.%J.%I
+#BSUB -e err.%J.%I
+
+# Load required modules.
+module load gcc/4.9.2 gdc perl/5.18.4 stacks/2.41
+
+# Use the internal jobindex as "IDX".
+IDX=$LSB_JOBINDEX
+
+# Conduct demultiplexing (requires implementation of mfeI restriction enzyme).
+/cluster/project/gdc/shared/tools/stacks-2.41_Mfel/bin/process_radtags -i gzfastq -P -1 ./data/rawreads/pool_${IDX}_R1.fastq.gz -2 ./data/rawreads/pool_${IDX}_R2.fastq.gz -q -s 10 -o ./results/demultiplexed/pool_${IDX} -b ./data/barcodes/barcodes_pool_${IDX}.txt --renz_1 mfeI --renz_2 taqI --inline_null --retain_header --disable-rad-check
