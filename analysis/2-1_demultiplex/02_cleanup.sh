@@ -17,7 +17,8 @@ mv ./results/demultiplexed/pool_12/${name}* ./results/demultiplexed/pool_12/dupl
 done
 
 # Move all individual *.fq.gz files to ./results/demultiplexed/, except the duplicates.
-for pl in 1 2 3 4 5 6 9 10 11 12 13 14
+# The ./results/demultiplexed/pool_12 can be skipped because it only contains duplicates.
+for pl in 1 2 3 4 5 6 9 10 11 13 14
 do
 mv ./results/demultiplexed/pool_${pl}/*.fq.gz ./results/demultiplexed/
 done

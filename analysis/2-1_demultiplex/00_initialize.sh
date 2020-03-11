@@ -1,4 +1,5 @@
 # Initialize the demultiplexing by creating necessary directories.
+if [ ! -e ./results/demultiplexed ]  ; then mkdir ./results/demultiplexed ; fi
 for pl in 1 2 3 4 5 6 9 10 11 12 13 14
 do
 if [ ! -e ./results/demultiplexed/pool_${pl} ]  ; then mkdir ./results/demultiplexed/pool_${pl} ; fi
