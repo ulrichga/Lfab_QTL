@@ -5,7 +5,7 @@ if [ ! -e ./results/mapped/filtered_intervals ]  ; then mkdir ./results/mapped/f
 if [ ! -e ./results/mapped/coverage ]  ; then mkdir ./results/mapped/coverage ; fi
 
 # Make a list of samples and move it to the mapping folder.
-ls ./results/demultiplexed/*.fq.gz | sed 's/.fq.gz//' | grep "\\.1" | sed 's/..$//' > ./results/demultiplexed/samples
+ls ./results/demultiplexed/*.fq.gz | sed 's/.fq.gz//' | grep "\\.1" | sed 's/..$//' | awk -F"/" '{print $4}' > ./results/demultiplexed/samples
 
 # Create a batch job to index the reference genome.
 bsub -W 1:00 -R "rusage[mem=2000]" "module load gcc/4.8.2 gdc bwa/0.7.17
