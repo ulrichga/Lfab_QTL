@@ -5,6 +5,7 @@ Make sure the necessary raw data are are available
 * The reference genome ./data/genome/Lf_genome_V1.0.fa
 * The quality filtered .bam files in ./results/mapped/samplesQ10/ that were produced during mapping.
 * The samples list ./results/demultiplexed/samples that was produced during mapping.
+
 The analysis also requires two additional scripts for splitting the reference genome:
 * fasta_generate_regions.py which is part of the freebayes distribution and available on [GitHub](https://github.com/ekg/freebayes/blob/master/scripts/fasta_generate_regions.py)
 * split.freebayes.regions.file.pl which was provided by Niklaus Zemp (GDC at ETH Zürich)
