@@ -1,0 +1,20 @@
+#!/bin/bash
+#BSUB -J "freebayes_all[1-164]%20"
+#BSUB -W 6:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=6000]"
+
+## Define paths
+in="./results/SNPcall/"
+genome="./data/genome/"
+out="./results/SNPcall/vcf"
+
+## Redefine internal job variable
+IDX=$LSB_JOBINDEX
+
+## Load necessary module
+module load gcc/4.8.2 gdc python/2.7.11 freebayes/1.3.1
+
+## Run freebayes with default settings, specifying generations (P, F1, F2, CV-control) as populations and giving information on ploidy
+freebayes -m 5 -q 5 -E 3 --min-repeat-entropy 1 -V --populations ${in}pops.txt -n 10 -F 0.1 -A ${in}ploidy.txt \
+          -L ${in}bamfiles.txt -t ${genome}regions/regions_1000000_${IDX} -v ${out}raw_${IDX}.vcf -f ${genome}Lf_genome_V1.0.fa
