@@ -1,6 +1,6 @@
 #!/bin/bash
 #BSUB -J "summarize_coverage"
-#BSUB -R "rusage[mem=1000]"
+#BSUB -R "rusage[mem=6000]"
 #BSUB -n 1
 #BSUB -W 2:00
 
@@ -33,7 +33,6 @@ awk '($3-$2) > 150 && ($3-$2) < 500' ${out}intervals/${name}_intervals_cov15 > $
 done
 
 ## Count the number of lines ("ddRAD loci") per file and save the output as a summary.
-cd /cluster/home/ulrichg/scratch/mapping
 wc -l ${out}filtered_intervals/*_cov3 > ${out}filtered_intervals_cov3_summary.txt
 wc -l ${out}filtered_intervals/*_cov6 > ${out}filtered_intervals_cov6_summary.txt
 wc -l ${out}filtered_intervals/*_cov10 > ${out}filtered_intervals_cov10_summary.txt
