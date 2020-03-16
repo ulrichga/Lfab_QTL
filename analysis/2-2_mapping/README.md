@@ -37,5 +37,9 @@ dos2unix ./analysis/2-2_mapping/04_summarize_insertsize.lsf
 bsub < ./analysis/2-2_mapping/04_summarize_insertsize.lsf
 ```
 ## Step 7
-Tun the 05_cleanup.sh script to remove superfluous data and obtain final summary dataframes. **Only execute if steps 1-6 is finished**.
-*This part is under construction...*
+Tun the 05_cleanup.sh script to remove superfluous data and obtain final summary dataframes. It is not necessary (but recommended) to run this step as it only produces a summary of the mapping and removes data that are not needed in the further analysis. This script can safely be executed on a login node. **This script should only be executed if steps 1-6 are finished**.
+```
+dos2unix ./analysis/2-2_mapping/05_cleanup.sh
+chmod +x ./analysis/2-2_mapping/05_cleanup.sh
+./analysis/2-2_mapping/05_cleanup.sh
+```

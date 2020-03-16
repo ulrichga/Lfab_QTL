@@ -1,9 +1,9 @@
 ## Cleanup script after mapping + summary. This is under construction.
 
-#### Obtain summary statistics
+#### Obtain a summary dataframe of the mapping
 
 ## Create a file with rownames
-more ./results/mapped/stats/stat_total.txt | awk -F" " '{print $1}' | awk -F"/" '{print $3}' | sed 's/_stat//' > name
+more ./results/mapped/stats/stat_total.txt | awk -F" " '{print $1}' | awk -F"/" '{print $5}' | sed 's/_stat//' > name
 echo "MEAN" >> name
 echo "TOTAL" >> name
 echo "SHARED_25%" >> name
@@ -19,10 +19,10 @@ more ./results/mapped/statsQ10/statQ10_mapped.txt | awk -F" " '{print $2}' > rea
 paste reads_total reads_mappedQ10 | awk '{print($2/$1*100)}' > %_mapped_Q10
 more ./results/mapped/samplesQ10/insertsize_avg.txt | awk -F"\t" '{print $3}' > ins_size_avg
 more ./results/mapped/samplesQ10/insertsize_sd.txt | awk -F"\t" '{print $3}' > ins_size_sd
-more ./results/mapped/coverage/filtered_intervals_cov3_summary.txt | awk -F" " '{print $1}' > intervals_cov3
-more ./results/mapped/coverage/filtered_intervals_cov6_summary.txt | awk -F" " '{print $1}' > intervals_cov6
-more ./results/mapped/coverage/filtered_intervals_cov10_summary.txt | awk -F" " '{print $1}' > intervals_cov10
-more ./results/mapped/coverage/filtered_intervals_cov15_summary.txt | awk -F" " '{print $1}' > intervals_cov15
+more ./results/mapped/filtered_intervals_cov3_summary.txt | awk -F" " '{print $1}' > intervals_cov3
+more ./results/mapped/filtered_intervals_cov6_summary.txt | awk -F" " '{print $1}' > intervals_cov6
+more ./results/mapped/filtered_intervals_cov10_summary.txt | awk -F" " '{print $1}' > intervals_cov10
+more ./results/mapped/filtered_intervals_cov15_summary.txt | awk -F" " '{print $1}' > intervals_cov15
 
 ## Remove the last entry of each coverage-variable
 sed -i '$ d' intervals_cov3
@@ -51,16 +51,16 @@ echo -en '\n \n \n \n \n \n ' >> ins_size_avg
 echo -en '\n \n \n \n \n \n ' >> ins_size_sd
 
 ## Append shared filtered intervals to the end of each coverage-variable
-more shared_filtered_intervals_cov3_summary.txt | awk -F" " '{print $1}' >> intervals_cov3
-more shared_filtered_intervals_cov6_summary.txt | awk -F" " '{print $1}' >> intervals_cov6
-more shared_filtered_intervals_cov10_summary.txt | awk -F" " '{print $1}' >> intervals_cov10
-more shared_filtered_intervals_cov15_summary.txt | awk -F" " '{print $1}' >> intervals_cov15
+more ./results/mapped/filtered_intervals/shared_filtered_intervals_cov3_summary.txt | awk -F" " '{print $1}' >> intervals_cov3
+more ./results/mapped/filtered_intervals/shared_filtered_intervals_cov6_summary.txt | awk -F" " '{print $1}' >> intervals_cov6
+more ./results/mapped/filtered_intervals/shared_filtered_intervals_cov10_summary.txt | awk -F" " '{print $1}' >> intervals_cov10
+more ./results/mapped/filtered_intervals/shared_filtered_intervals_cov15_summary.txt | awk -F" " '{print $1}' >> intervals_cov15
 
 ## Append the SHARED_XX% statistics to the end of each coverage-variable
-more sharedonly_filtered_intervals_summary.txt | grep cov3 | awk -F" " '{print $1}' >> intervals_cov3
-more sharedonly_filtered_intervals_summary.txt | grep cov6 | awk -F" " '{print $1}' >> intervals_cov6
-more sharedonly_filtered_intervals_summary.txt | grep cov10 | awk -F" " '{print $1}' >> intervals_cov10
-more sharedonly_filtered_intervals_summary.txt | grep cov15 | awk -F" " '{print $1}' >> intervals_cov15
+more ./results/mapped/filtered_intervals/sharedonly_filtered_intervals_summary.txt | grep cov3 | awk -F" " '{print $1}' >> intervals_cov3
+more ./results/mapped/filtered_intervals/sharedonly_filtered_intervals_summary.txt | grep cov6 | awk -F" " '{print $1}' >> intervals_cov6
+more ./results/mapped/filtered_intervals/sharedonly_filtered_intervals_summary.txt | grep cov10 | awk -F" " '{print $1}' >> intervals_cov10
+more ./results/mapped/filtered_intervals/sharedonly_filtered_intervals_summary.txt | grep cov15 | awk -F" " '{print $1}' >> intervals_cov15
 
 ## Paste the summary statistics together to have a single summary data frame.
 paste name reads_total reads_mapped reads_mappedQ10 %_mapped_Q10 ins_size_avg ins_size_sd intervals_cov3 intervals_cov6 intervals_cov10 intervals_cov15 > ./results/mapped/mapping_summary.txt
@@ -69,3 +69,28 @@ paste name reads_total reads_mapped reads_mappedQ10 %_mapped_Q10 ins_size_avg in
 rm name reads_total reads_mapped reads_mappedQ10 %_mapped_Q10 ins_size_avg ins_size_sd intervals_cov3 intervals_cov6 intervals_cov10 intervals_cov15
 
 #### Delete unnecessary folders and contents
+
+## Remove folder contents
+rm ./results/mapped/coverage/*
+rm ./results/mapped/filtered_intervals/*
+rm ./results/mapped/intervals/*
+rm ./results/mapped/samples/*
+rm ./results/mapped/stats/*
+rm ./results/mapped/statsQ10/*
+
+## Remove empty directories
+rmdir ./results/mapped/coverage
+rmdir ./results/mapped/filtered_intervals
+rmdir ./results/mapped/intervals
+rmdir ./results/mapped/samples
+rmdir ./results/mapped/stats
+rmdir ./results/mapped/statsQ10
+
+## Remove filtered intervals summaries
+rm ./results/mapped/filtered_intervals*.txt
+
+## Remove insertsize avg and sd summaries
+rm ./results/mapped/samplesQ10/*.txt
+
+## Remove lsf-logfiles
+rm lsf.o*
