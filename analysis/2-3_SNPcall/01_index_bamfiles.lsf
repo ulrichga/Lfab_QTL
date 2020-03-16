@@ -1,6 +1,6 @@
 #!/bin/bash
 #BSUB -J "index_bamfiles"
-#BSUB -R "rusage[mem=1000]"
+#BSUB -R "rusage[mem=5000]"
 #BSUB -n 1
 #BSUB -W 2:00
 

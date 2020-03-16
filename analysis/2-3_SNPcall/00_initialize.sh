@@ -16,8 +16,8 @@ cp /cluster/apps/gdc/freebayes/1.1.0/scripts/fasta_generate_regions.py ./data/ge
 cp /cluster/project/gdc/shared/scripts/submitscripts/FREEBAYES/split.freebayes.regions.file.pl ./data/genome/regions/
 
 ## Create a batch job to split the genome into regions of 1000000 bp size
-bsub -W 4:00 "module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.9
-samtools faidx Lf_genome_V1.0.fa
+bsub -W 4:00 -R "rusage[mem=200]" "module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.9
+samtools faidx ./data/genome/Lf_genome_V1.0.fa
 ./data/genome/regions/fasta_generate_regions.py ./data/genome/Lf_genome_V1.0.fa 1000000 > ./data/genome/regions/regions.txt
 ./data/genome/regions/split.freebayes.regions.file.pl  ./data/genome/regions/regions.txt 1000000
 mv regions_* ./data/genome/regions/"

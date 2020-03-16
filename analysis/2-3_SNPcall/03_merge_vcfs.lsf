@@ -1,0 +1,18 @@
+#!/bin/bash
+#BSUB -J "merge_vcfs"
+#BSUB -R "rusage[mem=6000]"
+#BSUB -n 1
+#BSUB -W 2:00
+
+## Load necessary modules
+module load gcc/4.8.2 gdc vcflib/1.0.1 perl/5.18.4 samtools/1.9
+
+## Merge the vcf files produced by freebayes
+cat `ls ./results/SNPcall/vcf/raw_*.vcf -1v` | vcffirstheader | vcfstreamsort | vcfuniq > ./results/SNPcall/raw.vcf
+
+## gzip the resulting vcf file
+gzip ./results/SNPcall/raw.vcf
+
+## Remove intermediate vcf files and the directory that contained them
+rm ./results/SNPcall/vcf/*
+rmdir ./results/SNPcall/vcf/
