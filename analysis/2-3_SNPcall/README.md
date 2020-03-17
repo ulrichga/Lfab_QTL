@@ -1,7 +1,7 @@
-# SNP-calling
+# SNP calling
 To run this part of the analysis follow the steps described here. The analysis was executed on the Euler cluster and pulls dependencies from it. To run it on another cluster, some changes to the code may be necessary. For all the steps the current directory should be the Lfab_QTL directory.
 ## Step 1
-Make sure the necessary raw data are are available
+Make sure the necessary raw data are are available.
 * The reference genome ./data/genome/Lf_genome_V1.0.fa
 * The quality filtered .bam files in ./results/mapped/samplesQ10/ that were produced during mapping.
 * The samples list ./results/demultiplexed/samples that was produced during mapping.
@@ -29,8 +29,15 @@ dos2unix ./analysis/2-3_SNPcall/02_freebayes.lsf
 bsub < ./analysis/2-3_SNPcall/02_freebayes.lsf
 ```
 ## Step 5
-Run the 03_merge_vcfs.lsf script to merge the vcf files produced under step 4. This step also deletes the intermediate vcf files and compresses the resulting vcf file. No cleanup required this time.  **This script should only be executed if step 4 is finished**.
+Run the 03_merge_vcfs.lsf script to merge the vcf files produced under step 4. The resulting raw vcf file is then compressed with gzip. **This script should only be executed if step 4 is finished**.
 ```
 dos2unix ./analysis/2-3_SNPcall/03_merge_vcfs.lsf
 bsub < ./analysis/2-3_SNPcall/03_merge_vcfs.lsf
+```
+## Step 6
+Run the 04_cleanup.sh script to delete vcf and log files as well as directories that will not be used in further steps. This includes regions and indexing files of the reference genome. It is safe to run this on a login node. **This script should only be executed if step 5 is finished**.
+```
+dos2unix ./analysis/2-3_SNPcall/04_cleanup.sh
+chmod +x ./analysis/2-3_SNPcall/04_cleanup.sh
+./analysis/2-3_SNPcall/04_cleanup.sh
 ```

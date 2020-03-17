@@ -1,6 +1,6 @@
 #!/bin/bash
 #BSUB -J "merge_vcfs"
-#BSUB -R "rusage[mem=6000]"
+#BSUB -R "rusage[mem=12000]"
 #BSUB -n 1
 #BSUB -W 2:00
 
@@ -12,10 +12,3 @@ cat `ls ./results/SNPcall/vcf/raw_*.vcf -1v` | vcffirstheader | vcfstreamsort | 
 
 ## gzip the resulting vcf file
 gzip ./results/SNPcall/raw.vcf
-
-## Remove intermediate vcf files and the directory that contained them
-rm ./results/SNPcall/vcf/*
-rmdir ./results/SNPcall/vcf/
-
-## Remove logfiles
-rm lsf.*
