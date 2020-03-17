@@ -16,3 +16,6 @@ gzip ./results/SNPcall/raw.vcf
 ## Remove intermediate vcf files and the directory that contained them
 rm ./results/SNPcall/vcf/*
 rmdir ./results/SNPcall/vcf/
+
+## Remove logfiles
+rm lsf.*
