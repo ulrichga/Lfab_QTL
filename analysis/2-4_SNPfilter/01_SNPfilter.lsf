@@ -1,0 +1,145 @@
+#!/bin/bash
+#BSUB -J "filter_diploids"
+#BSUB -W 4:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=8000]"
+
+## Load necessary modules
+module load gcc/4.8.2 gdc perl/5.18.4 zlib/1.2.8 vcftools/0.1.16 vcflib/1.0.1
+
+####    ~~~~~~~~~~~~~    Start of dDocent pipeline    ~~~~~~~~~~~~~    ####
+
+## Keep only markers which are in >= 50% of individuals,
+## occur at least in 3 individuals and have a minimum quality score of 20
+## (dDocent tutorial uses --minQ 30 instead)
+vcftools --gzvcf ./results/SNPfilter/n2.recode.vcf --max-missing 0.5 --mac 3 --minQ 20 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20.n2
+
+## Keep only SNPs with a min depth of 3
+## (Identical to dDocent)
+vcftools --vcf ./results/SNPfilter/mm50ma3mi20.n2.recode.vcf --minDP 3 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20dp3.n2
+
+## Exclude individuals with >50% missing genotypes
+## (Identical to dDocent) but without plotting missingness as histogram.
+vcftools --vcf ./results/SNPfilter/mm50ma3mi20dp3.n2.recode.vcf --missing-indv
+mv out.imiss ./results/SNPfilter/out.imiss
+awk '$5 > 0.5' ./results/SNPfilter/out.imiss | cut -f1 | sed '1d' > ./results/SNPfilter/lowDP.indv
+vcftools --vcf ./results/SNPfilter/mm50ma3mi20dp3.n2.recode.vcf --remove ./results/SNPfilter/lowDP.indv --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20dp3md50.n2
+## To plot missingness as histogram do the following by deleting "##" from the following 14 lines:
+##awk '!/IN/' ./results/SNPfilter/out.imiss | cut -f5 > ./results/SNPfilter/totalmissing
+##gnuplot << \EOF
+##set terminal dumb size 120, 30
+##set autoscale
+##unset label
+##set title "Histogram of % missing data per individual"
+##set ylabel "Number of Occurrences"
+##set xlabel "% of missing data"
+##set yr [0:100000]
+##binwidth=0.01
+##bin(x,width)=width*floor(x/width) + binwidth/2.0
+##plot './results/SNPfilter/totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+##pause -1
+##EOF
+
+## Restrict the data to variants called in a high percentage of individuals and
+## filter by mean depth of genotypes
+## (dDocent tutorial uses --min-meanDP 20 instead)
+vcftools --vcf ./results/SNPfilter/mm50ma3mi20dp3md50.n2.recode.vcf --max-missing 0.95 --maf 0.05 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20dp3md50mm95mdp10.n2 --min-meanDP 10
+
+## Skip filtering by a population specific call rate
+## (This is done in the dDocent tutorial but not here)
+
+## Filter out loci with an allele balance below 0.25 and above 0.75 but include
+## those that are close to zero.
+## (Identical to dDocent)
+vcffilter -s -f "AB > 0.25 & AB < 0.75 | AB < 0.01" ./results/SNPfilter/mm50ma3mi20dp3md50mm95mdp10.n2.recode.vcf > ./results/SNPfilter/filt1.vcf
+
+## Filter out sites that have reads from both strands unless there are 100x more
+## forward than reverse reads supporting an alternate site and vice versa
+## (Identical to dDocent)
+vcffilter -f "SAF / SAR > 100 & SRF / SRR > 100 | SAR / SAF > 100 & SRR / SRF > 100" -s ./results/SNPfilter/filt1.vcf > ./results/SNPfilter/filt2.vcf
+
+## Remove loci with large discrepancy between reference and alternate mapping quality
+## (Identical to dDocent)
+vcffilter -f "MQM / MQMR > 0.9 & MQM / MQMR < 1.05" ./results/SNPfilter/filt2.vcf > ./results/SNPfilter/filt3.vcf
+
+## Filter for discrepancy in the pairing status of reads supporting reference or alternate alleles
+## (Identical to dDocent)
+vcffilter -f "PAIRED > 0.05 & PAIREDR > 0.05 & PAIREDR / PAIRED < 1.75 & PAIREDR / PAIRED > 0.25 | PAIRED < 0.05 & PAIREDR < 0.05" -s ./results/SNPfilter/filt3.vcf > ./results/SNPfilter/filt4.vcf
+
+## Remove any locus that has a quality score below 1/4 of the depth
+## (Identical to dDocent)
+vcffilter -f "QUAL / DP > 0.25" ./results/SNPfilter/filt4.vcf > ./results/SNPfilter/filt5.vcf
+
+## Filter sites with read depths greater than the mean depth
+## plus 2-3 times sqrt(mean depth) with a quality score < than 2x the depth
+## (Identical to dDocent except for --max-meanDP choice at the end)
+## Create list of depths
+cut -f8 ./results/SNPfilter/filt5.vcf | grep -oe "DP=[0-9]*" | sed -s 's/DP=//g' > ./results/SNPfilter/filt5.DEPTH
+## Create list of quality scores
+awk '!/#/' ./results/SNPfilter/filt5.vcf | cut -f1,2,6 > ./results/SNPfilter/filt5.vcf.loci.qual
+## Calculate mean depth
+meanDP=`awk '{ sum += $1; n++ } END { if (n > 0) print sum / n; }' ./results/SNPfilter/filt5.DEPTH`
+## Calculate a cutoff as the mean + 3x square root of the mean
+cutoff=`python -c "print int(${meanDP}+3*(${meanDP}**0.5))"`
+## Paste the depth and quality files together and find the loci above the
+## cutoff that do not have quality scores 2 times the depth
+paste ./results/SNPfilter/filt5.vcf.loci.qual ./results/SNPfilter/filt5.DEPTH | awk -v x=${cutoff} '$4 > x' | awk '$3 < 2 * $4' > ./results/SNPfilter/filt5.lowQDloci
+## Remove the sites in the filt5.lowQDloci file. Those failed the filter
+## (depth > cutoff & quality score < 2x depth) and recalculate the depth across loci with vcftools
+vcftools --vcf ./results/SNPfilter/filt5.vcf --site-depth --exclude-positions ./results/SNPfilter/filt5.lowQDloci --out ./results/SNPfilter/filt5
+## Define an upper depth cutoff
+## Take vcftools output and cut it to only the depth scores
+cut -f3 ./results/SNPfilter/filt5.ldepth > ./results/SNPfilter/filt5.site.depth
+## Calculate average depth by dividing the above by the number of individuals (n_ind)
+n_ind=`awk '{if ($1 == "#CHROM"){print NF-9; exit}}' ./results/SNPfilter/filt5.vcf`
+awk '!/D/' ./results/SNPfilter/filt5.site.depth | awk -v x=${n_ind} '{print $1/x}' > ./results/SNPfilter/meandepthpersite
+## To plot mean depht per site  as histogram do the following by deleting "##" from the following 14 lines:
+##gnuplot << \EOF
+##set terminal dumb size 120, 30
+##set autoscale
+##set xrange [10:800]
+##unset label
+##set title "Histogram of mean depth per site"
+##set ylabel "Number of Occurrences"
+##set xlabel "Mean Depth"
+##binwidth=1
+##bin(x,width)=width*floor(x/width) + binwidth/2.0
+##set xtics 50
+##plot 'meandepthpersite' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+##pause -1
+##EOF
+## Define a mean depth cutoff based on the histogram
+vcftools --vcf ./results/SNPfilter/filt5.vcf --recode-INFO-all --out ./results/SNPfilter/FILT --max-meanDP 400 --exclude-positions ./results/SNPfilter/filt5.lowQDloci --recode
+
+## Skip applying a population specific HWE filter
+## (This is done in the dDocent tutorial but not here)
+
+## Convert variant calls to SNPs and indels using vcfallelicprimitives
+## (Identical to dDocent)
+vcfallelicprimitives ./results/SNPfilter/FILT.recode.vcf --keep-info --keep-geno > ./results/SNPfilter/FILT.prim.vcf
+
+## Remove indels to get only SNPs
+## (Identical to dDocent)
+vcftools --vcf ./results/SNPfilter/FILT.prim.vcf --remove-indels --recode --recode-INFO-all --out ./results/SNPfilter/SNP.FILT.prim
+
+## Skip the RAD haplotyper filter
+## (This is done in the dDocent tutorial but not here)
+
+####    ~~~~~~~~~~~~~    End of dDocent pipeline    ~~~~~~~~~~~~~    ####
+
+## Separate the CV17-84 control individuals from the other diploids
+vcftools --vcf ./results/SNPfilter/SNP.FILT.prim.recode.vcf --keep ./results/SNPfilter/control --recode --recode-INFO-all --out ./results/SNPfilter/n2.control
+vcftools --vcf ./results/SNPfilter/SNP.FILT.prim.recode.vcf --remove ./results/SNPfilter/control --recode --recode-INFO-all --out ./results/SNPfilter/n2.samples
+
+## Reduce the non-control diploids to non-invariant high-confidence biallelic SNPs
+## (HCBS = High Confidence Biallelic Snps)
+vcftools --vcf ./results/SNPfilter/n2.samples.recode.vcf --min-alleles 2 --max-alleles 2 --maf 0.01 --recode --recode-INFO-all --out ./results/SNPfilter/n2.samples.hcbs
+
+## Make a list of the HCBS of the diploid sample individuals and use it
+## to filter the vcf file with haploids after transforming it to allelic primitives.
+vcf2tsv -n -g ./results/SNPfilter/n2.samples.hcbs.recode.vcf | awk '{print $1 "\t" $2}' > ./results/SNPfilter/HCBS_list
+vcfallelicprimitives ./results/SNPfilter/n1.recode.vcf --keep-info --keep-geno > ./results/SNPfilter/n1.prim.vcf
+vcftools --vcf ./results/SNPfilter/n1.prim.vcf --positions ./results/SNPfilter/HCBS_list --recode --recode-INFO-all --out ./results/SNPfilter/n1.samples.hcbs
+
+## Then also use the HCBS_list to filter the control individuals
+vcftools --vcf ./results/SNPfilter/n1.control.recode.vcf --positions ./results/SNPfilter/HCBS_list --recode --recode-INFO-all --out ./results/SNPfilter/n2.control.hcbs
