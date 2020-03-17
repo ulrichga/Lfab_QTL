@@ -5,7 +5,7 @@
 .Ruserdata
 *.Rproj
 
-# Exclude reference directories
+# Exclude data and results directories
 data/
 results/
 
@@ -15,3 +15,6 @@ paths.txt
 # Exclude the devnotes files that contain code for constructing procedures
 analysis/2-1_demultiplex/devnotes
 analysis/2-2_mapping/devnotes
+
+# Remove directory with scritps that should not be uploaded
+additional_scripts/
