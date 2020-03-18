@@ -1,0 +1,20 @@
+#!/bin/bash
+#BSUB -J "summarize_vcfs"
+#BSUB -W 1:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=12000]"
+
+## If the files n_loci and filenames are already there, delete them
+if [ -e ./results/SNPfilter/n_loci ]  ; then rm ./results/SNPfilter/n_loci ; fi
+if [ -e ./results/SNPfilter/filenames ]  ; then rm ./results/SNPfilter/filenames ; fi
+
+## Loop through all vcf files counting their loci and writing their name to a file
+all_vcfs=$(ls -lt ./results/SNPfilter | grep '\.vcf$' | tac | awk '{ print $9; }')
+for file in $all_vcfs
+do
+awk '!/#/' ./results/SNPfilter/${file} | wc -l >> ./results/SNPfilter/n_loci
+echo ${file} >> ./results/SNPfilter/filenames
+done
+
+## Save the filenames and locus counts as a summary txt frame
+paste ./results/SNPfilter/filenames ./results/SNPfilter/n_loci > filter_summary.txt

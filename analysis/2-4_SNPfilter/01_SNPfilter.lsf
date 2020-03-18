@@ -12,33 +12,33 @@ module load gcc/4.8.2 gdc perl/5.18.4 zlib/1.2.8 vcftools/0.1.16 vcflib/1.0.1
 ## Keep only markers which are in >= 50% of individuals,
 ## occur at least in 3 individuals and have a minimum quality score of 20
 ## (dDocent tutorial uses --minQ 30 instead)
-vcftools --gzvcf ./results/SNPfilter/n2.recode.vcf --max-missing 0.5 --mac 3 --minQ 20 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20.n2
+vcftools --vcf ./results/SNPfilter/n2.recode.vcf --max-missing 0.5 --mac 3 --minQ 20 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20.n2
 
 ## Keep only SNPs with a min depth of 3
 ## (Identical to dDocent)
 vcftools --vcf ./results/SNPfilter/mm50ma3mi20.n2.recode.vcf --minDP 3 --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20dp3.n2
 
 ## Exclude individuals with >50% missing genotypes
-## (Identical to dDocent) but without plotting missingness as histogram.
+## (Identical to dDocent)
 vcftools --vcf ./results/SNPfilter/mm50ma3mi20dp3.n2.recode.vcf --missing-indv
 mv out.imiss ./results/SNPfilter/out.imiss
 awk '$5 > 0.5' ./results/SNPfilter/out.imiss | cut -f1 | sed '1d' > ./results/SNPfilter/lowDP.indv
 vcftools --vcf ./results/SNPfilter/mm50ma3mi20dp3.n2.recode.vcf --remove ./results/SNPfilter/lowDP.indv --recode --recode-INFO-all --out ./results/SNPfilter/mm50ma3mi20dp3md50.n2
-## To plot missingness as histogram do the following by deleting "##" from the following 14 lines:
-##awk '!/IN/' ./results/SNPfilter/out.imiss | cut -f5 > ./results/SNPfilter/totalmissing
-##gnuplot << \EOF
-##set terminal dumb size 120, 30
-##set autoscale
-##unset label
-##set title "Histogram of % missing data per individual"
-##set ylabel "Number of Occurrences"
-##set xlabel "% of missing data"
-##set yr [0:100000]
-##binwidth=0.01
-##bin(x,width)=width*floor(x/width) + binwidth/2.0
-##plot './results/SNPfilter/totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
-##pause -1
-##EOF
+## Plot missingness as histogram that can be inspected for assessing whether the 0.5 cutoff is appropriate
+awk '!/IN/' ./results/SNPfilter/out.imiss | cut -f5 > ./results/SNPfilter/totalmissing
+gnuplot << \EOF > ./results/SNPfilter/totalmissing_plot
+set terminal dumb size 120, 30
+set autoscale
+unset label
+set title "Histogram of % missing data per individual"
+set ylabel "Number of Occurrences"
+set xlabel "% of missing data"
+#set yr [0:100000]
+binwidth=0.01
+bin(x,width)=width*floor(x/width) + binwidth/2.0
+plot './results/SNPfilter/totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+pause -1
+EOF
 
 ## Restrict the data to variants called in a high percentage of individuals and
 ## filter by mean depth of genotypes
@@ -93,21 +93,21 @@ cut -f3 ./results/SNPfilter/filt5.ldepth > ./results/SNPfilter/filt5.site.depth
 ## Calculate average depth by dividing the above by the number of individuals (n_ind)
 n_ind=`awk '{if ($1 == "#CHROM"){print NF-9; exit}}' ./results/SNPfilter/filt5.vcf`
 awk '!/D/' ./results/SNPfilter/filt5.site.depth | awk -v x=${n_ind} '{print $1/x}' > ./results/SNPfilter/meandepthpersite
-## To plot mean depht per site  as histogram do the following by deleting "##" from the following 14 lines:
-##gnuplot << \EOF
-##set terminal dumb size 120, 30
-##set autoscale
-##set xrange [10:800]
-##unset label
-##set title "Histogram of mean depth per site"
-##set ylabel "Number of Occurrences"
-##set xlabel "Mean Depth"
-##binwidth=1
-##bin(x,width)=width*floor(x/width) + binwidth/2.0
-##set xtics 50
-##plot 'meandepthpersite' using (bin($1,binwidth)):(1.0) smooth freq with boxes
-##pause -1
-##EOF
+## Plot mean depht per site  as histogram
+gnuplot << \EOF > ./results/SNPfilter/meandepthpersite_plot
+set terminal dumb size 120, 30
+set autoscale
+set xrange [10:500]
+unset label
+set title "Histogram of mean depth per site"
+set ylabel "Number of Occurrences"
+set xlabel "Mean Depth"
+binwidth=1
+bin(x,width)=width*floor(x/width) + binwidth/2.0
+set xtics 50
+plot './results/SNPfilter/meandepthpersite' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+pause -1
+EOF
 ## Define a mean depth cutoff based on the histogram
 vcftools --vcf ./results/SNPfilter/filt5.vcf --recode-INFO-all --out ./results/SNPfilter/FILT --max-meanDP 400 --exclude-positions ./results/SNPfilter/filt5.lowQDloci --recode
 
@@ -122,7 +122,7 @@ vcfallelicprimitives ./results/SNPfilter/FILT.recode.vcf --keep-info --keep-geno
 ## (Identical to dDocent)
 vcftools --vcf ./results/SNPfilter/FILT.prim.vcf --remove-indels --recode --recode-INFO-all --out ./results/SNPfilter/SNP.FILT.prim
 
-## Skip the RAD haplotyper filter
+## Skip the RAD-haplotyper filter
 ## (This is done in the dDocent tutorial but not here)
 
 ####    ~~~~~~~~~~~~~    End of dDocent pipeline    ~~~~~~~~~~~~~    ####
@@ -142,4 +142,4 @@ vcfallelicprimitives ./results/SNPfilter/n1.recode.vcf --keep-info --keep-geno >
 vcftools --vcf ./results/SNPfilter/n1.prim.vcf --positions ./results/SNPfilter/HCBS_list --recode --recode-INFO-all --out ./results/SNPfilter/n1.samples.hcbs
 
 ## Then also use the HCBS_list to filter the control individuals
-vcftools --vcf ./results/SNPfilter/n1.control.recode.vcf --positions ./results/SNPfilter/HCBS_list --recode --recode-INFO-all --out ./results/SNPfilter/n2.control.hcbs
+vcftools --vcf ./results/SNPfilter/n2.control.recode.vcf --positions ./results/SNPfilter/HCBS_list --recode --recode-INFO-all --out ./results/SNPfilter/n2.control.hcbs

@@ -22,4 +22,27 @@ In this step the following important files are produced:
 * ./results/SNPfilter/n2.samples.hcbs.recode.vcf - a vcf with HCBS and all diploid sample individuals
 * ./results/SNPfilter/n1.samples.hcbs.recode.vcf - a vcf with HCBS and all haploid sample individuals
 * ./results/SNPfilter/HCBS_list - a list of all HCBS that are kept after filtering polymorphic sites in the diploid dataset
-_This script is under construction..._
+Additionally, it produces histograms of missingness (./results/SNPfilter/totalmissing_plot) and of mean depth per site (./results/SNPfilter/meandepthpersite_plot). Those may be inspected to judge how appropriate the 0.5 and 400 cutoffs are, respectively:
+```
+more ./results/SNPfilter/totalmissing_plot
+more ./results/SNPfilter/meandepthpersite_plot
+```
+## Step 4
+Summarize the filtering procedure, outputting vcf file names and the corresponding number of loci. This script produces a file (/results/SNPfilter/filter_summary.txt) that shows the number of loci in each of the vcfs that were handled during step 3. **This script should only be executed if step 3 is finished**.
+```
+dos2unix ./analysis/2-4_SNPfilter/02_filter_summary.lsf
+bsub < ./analysis/2-4_SNPfilter/02_filter_summary.lsf
+```
+## Step 5
+Output SNP tables for the haploid and diploid samples that will later on be used for linkage mapping. **This script should only be executed if step 3 is finished**.
+```
+dos2unix ./analysis/2-4_SNPfilter/03_SNPtable.lsf
+bsub < ./analysis/2-4_SNPfilter/03_SNPtable.lsf
+```
+## Step 6
+Run the ./analysis/2-4_SNPfilter/04_cleanup.sh script to remove all intermediary. It is safe to run this on a login node. **This script should only be executed if step 1-5 are finished**.
+```
+dos2unix ./analysis/2-4_SNPfilter/04_cleanup.sh
+chmod +x ./analysis/2-4_SNPfilter/04_cleanup.sh
+./analysis/2-4_SNPfilter/04_cleanup.sh
+```

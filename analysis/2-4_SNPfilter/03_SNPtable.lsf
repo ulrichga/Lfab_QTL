@@ -1,0 +1,21 @@
+#!/bin/bash
+#BSUB -J "SNPtable"
+#BSUB -W 1:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=4000]"
+
+## Load necessary modules
+module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.9
+
+## Compress the final vcfs of diploid and haploid samples and the control individuals
+bgzip -c ./results/SNPfilter/n2.control.hcbs.recode.vcf > ./results/SNPfilter/n2.control.hcbs.recode.vcf.gz
+bgzip -c ./results/SNPfilter/n2.samples.hcbs.recode.vcf > ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz
+bgzip -c ./results/SNPfilter/n1.samples.hcbs.recode.vcf > ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz
+
+## Index both files
+tabix -p vcf ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz
+tabix -p vcf ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz
+
+## Make SNP tables for both files
+(bcftools query -l ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > SNPs_n2
+(bcftools query -l ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > SNPs_n1
