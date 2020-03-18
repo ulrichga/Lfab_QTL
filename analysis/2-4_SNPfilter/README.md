@@ -40,7 +40,7 @@ dos2unix ./analysis/2-4_SNPfilter/03_SNPtable.lsf
 bsub < ./analysis/2-4_SNPfilter/03_SNPtable.lsf
 ```
 ## Step 6
-Run the ./analysis/2-4_SNPfilter/04_cleanup.sh script to remove all intermediary. It is safe to run this on a login node. **This script should only be executed if step 1-5 are finished**.
+Run the ./analysis/2-4_SNPfilter/04_cleanup.sh script to remove all intermediary vcfs and other files that will no longber be used. It is safe to run this on a login node. **This script should only be executed if step 1-5 are finished**.
 ```
 dos2unix ./analysis/2-4_SNPfilter/04_cleanup.sh
 chmod +x ./analysis/2-4_SNPfilter/04_cleanup.sh

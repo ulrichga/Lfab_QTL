@@ -17,5 +17,5 @@ tabix -p vcf ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz
 tabix -p vcf ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz
 
 ## Make SNP tables for both files
-(bcftools query -l ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > SNPs_n2
-(bcftools query -l ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > SNPs_n1
+(bcftools query -l ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n2.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > ./results/SNPfilter/SNPs_n2
+(bcftools query -l ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/SNPfilter/n1.samples.hcbs.recode.vcf.gz | sed 's/^\t//') > ./results/SNPfilter/SNPs_n1

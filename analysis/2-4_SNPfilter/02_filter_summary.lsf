@@ -17,4 +17,4 @@ echo ${file} >> ./results/SNPfilter/filenames
 done
 
 ## Save the filenames and locus counts as a summary txt frame
-paste ./results/SNPfilter/filenames ./results/SNPfilter/n_loci > filter_summary.txt
+paste ./results/SNPfilter/filenames ./results/SNPfilter/n_loci > ./results/SNPfilter/filter_summary.txt
