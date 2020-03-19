@@ -79,7 +79,7 @@ for(i in rownames(female.wilcox.pval)){ # compare all rows
 }
 
 #    Output p-values
-write.table(female.wilcox.pval, file="./results/dominance_firstgen_wilcoxtests.txt", quote=FALSE, row.names=FALSE, sep="\t")
+write.table(female.wilcox.pval, file="./results/dominance_firstgen_wilcoxtests.txt", quote=FALSE, sep="\t")
 
 # 5. Compare sex ratio between crosses with offspring ###########################################################################
 #    Subset the data frame to contain only data from colonies with offspring
