@@ -52,5 +52,9 @@ It performs the following tasks:
 
 The resulting phenotype data frame is saved as ./results/prepQTL/phenotypes_reduced.txt
 # Step 4
-Run the 02_analyse_phenotypes.R script. This script is used to calculate a corrected phenotype variable. A new version of the phenotype data is then saved as ./results/prepQTL/phenotypes_corrected.txt
-_... in prep ..._
+Run the 02_analyse_phenotypes.R script. This script is used to calculate a corrected phenotype variable. A new version of the phenotype data is then saved as ./results/prepQTL/phenotypes_corrected.txt. It additionally outputs a summary of the model used to calculate the residuals which are considered corrected phenotype as ./results/prepQTL/zeroinfl_model.
+```
+dos2unix ./analysis/2-6_prepQTL/02_analyse_phenotypes.R
+bsub -W 1:00 -R "rusage[mem=100]" "module load new gcc/4.8.2 r/3.5.1
+R --vanilla --slave < ./analysis/2-6_prepQTL/02_analyse_phenotypes.R > out"
+```
