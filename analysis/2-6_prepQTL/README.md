@@ -66,3 +66,15 @@ dos2unix ./analysis/2-6_prepQTL/03_make_Rqtl_input.R
 bsub -W 1:00 -R "rusage[mem=200]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/2-6_prepQTL/03_make_Rqtl_input.R > out"
 ```
+## Step 6
+Run the 04_Rqtl_santiy_check.R script. This script performs some standard sanity checks implemented in the qtl package and finally outputs a list of SNPs that will be used in the QTL mapping and an R/qtl input file that will be used in the QTL analysis. The list of SNPs will also be used to estimate genotyping error.
+```
+dos2unix ./analysis/2-6_prepQTL/04_Rqtl_santiy_check.R
+bsub -W 1:00 -R "rusage[mem=200]" "module load new gcc/4.8.2 r/3.5.1
+R --vanilla --slave < ./analysis/2-6_prepQTL/04_Rqtl_santiy_check.R > out"
+```
+It performs the following checks/filtering procedures:
+* Making sure there are no markers missing in >50% of individuals (which was done before)
+* Making sure there are no individuals with >50% missing genotypes (which was done before)
+* Checking for segregation distortion (which was done before)
+* Checking for duplicated genotypes
