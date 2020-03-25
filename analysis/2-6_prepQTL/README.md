@@ -53,21 +53,21 @@ It performs the following tasks:
 
 The resulting phenotype data frame is saved as ./results/prepQTL/phenotypes_reduced.txt
 ## Step 4
-Run the 02_analyse_phenotypes.R script. This script is used to calculate a corrected phenotype variable. A new version of the phenotype data is then saved as ./results/prepQTL/phenotypes_corrected.txt. It additionally outputs a summary of the model used to calculate the residuals which are considered corrected phenotype as ./results/prepQTL/zeroinfl_model.
+Run the 02_analyse_phenotypes.R script. This script is used to calculate a corrected phenotype variable. A new version of the phenotype data is then saved as ./results/prepQTL/phenotypes_corrected.txt. It additionally outputs a summary of the model used to calculate the residuals which are considered corrected phenotype as ./results/prepQTL/zeroinfl_model. **This should only be executed if step 3 is completed**.
 ```
 dos2unix ./analysis/2-6_prepQTL/02_analyse_phenotypes.R
 bsub -W 1:00 -R "rusage[mem=300]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/2-6_prepQTL/02_analyse_phenotypes.R > out"
 ```
 ## Step 5
-Run the 03_make_Rqtl_input.R script. This script uses the edited linkage map, the input file for MSTmap (MSTinput.txt) and the corrected phenotypes to make an input file that can be used for analysis with R/qtl (./results/prepQTL/Rqtlin.csv).
+Run the 03_make_Rqtl_input.R script. This script uses the edited linkage map, the input file for MSTmap (MSTinput.txt) and the corrected phenotypes to make an input file that can be used for analysis with R/qtl (./results/prepQTL/Rqtlin.csv). **This should only be executed if step 4 is completed**.
 ```
 dos2unix ./analysis/2-6_prepQTL/03_make_Rqtl_input.R
 bsub -W 1:00 -R "rusage[mem=200]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/2-6_prepQTL/03_make_Rqtl_input.R > out"
 ```
 ## Step 6
-Run the 04_Rqtl_santiy_check.R script. This script performs some standard sanity checks implemented in the qtl package and finally outputs a list of SNPs that will be used in the QTL mapping and an R/qtl input file that will be used in the QTL analysis. The list of SNPs will also be used to estimate genotyping error.
+Run the 04_Rqtl_santiy_check.R script. This script performs some standard sanity checks implemented in the qtl package and finally outputs a list of SNPs that will be used in the QTL mapping and an R/qtl input file that will be used in the QTL analysis. The list of SNPs will also be used to estimate genotyping error. **This should only be executed if step 5 is completed**.
 ```
 dos2unix ./analysis/2-6_prepQTL/04_Rqtl_santiy_check.R
 bsub -W 1:00 -R "rusage[mem=200]" "module load new gcc/4.8.2 r/3.5.1
@@ -78,3 +78,10 @@ It performs the following checks/filtering procedures:
 * Making sure there are no individuals with >50% missing genotypes (which was done before)
 * Checking for segregation distortion (which was done before)
 * Checking for duplicated genotypes
+## Step 7
+Run the 05_cleanup.sh script to delete R-console outputs and lsf-logfiles. **This should only be executed if step 6 is completed**.
+```
+dos2unix ./analysis/2-6_prepQTL/05_cleanup.R
+chmod +x ./analysis/2-6_prepQTL/05_cleanup.R
+./analysis/2-6_prepQTL/05_cleanup.R
+```
