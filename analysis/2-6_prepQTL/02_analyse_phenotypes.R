@@ -16,7 +16,7 @@ pheno <- read.table("./results/prepQTL/phenotypes_reduced.txt", header=T)
 
 # Transform n_wasps_added into a factorial variable and F2_father into a character variable
 pheno$n_wasps_added <- as.factor(pheno$n_wasps_added)
-pheno$F2_father <- as.character(F2_father)
+pheno$F2_father <- as.character(pheno$F2_father)
 
 # Conduct zero-inflated poisson regression with a full model explaining n_offspring
 full <- zeroinfl(n_offspring ~ n_nymphs + n_wasps_added + all_removed + any_found_dead + any_in_tube | n_nymphs + n_wasps_added + all_removed + any_found_dead + any_in_tube, data=pheno, dist="poisson")
@@ -31,13 +31,11 @@ sink("./results/prepQTL/zeroinfl_model.txt")
 cat("####    ~~~~~~~~~~~~~    Formula    ~~~~~~~~~~~~~    ####\n")
 formula(reduced)
 cat("\n")
-cat("####    ~~~~~~~~~~~~~    Model summary    ~~~~~~~~~~~~~    ####")
+cat("####    ~~~~~~~~~~~~~    Model summary    ~~~~~~~~~~~~~    ####\n")
 summary(reduced)
 sink()
 
 # Calculate residuals and attach them to the phenotypes data frame
-residuals(reduced)
-hist(residuals(reduced))
 pheno$residuals <- NA
 rows <- as.numeric(names(residuals(reduced)))
 pheno[rows, "residuals"] <- residuals(reduced)
