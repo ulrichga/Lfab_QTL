@@ -1,7 +1,7 @@
 # Parepare input for QTL-analysis with R/qtl
 To run this part of the analysis execute the following steps.
 ## Step 1
-Make sure the necessary input data are available
+Make sure the necessary input data are available _(this List is incomplete)_
 * Phenotype data ./data/crossing_data/F3_colonies_25-04-2019.txt
 * The MSTinput file ./results/linkage_mapping/MSTinput.txt
 ## Step 2
