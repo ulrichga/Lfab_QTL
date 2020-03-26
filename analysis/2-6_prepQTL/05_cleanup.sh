@@ -2,5 +2,5 @@
 rm lsf*
 
 ## Remove standard R-console outputs
-rm Rplot.pdf
+rm Rplots.pdf
 rm out

@@ -81,7 +81,7 @@ It performs the following checks/filtering procedures:
 ## Step 7
 Run the 05_cleanup.sh script to delete R-console outputs and lsf-logfiles. **This should only be executed if step 6 is completed**.
 ```
-dos2unix ./analysis/2-6_prepQTL/05_cleanup.R
-chmod +x ./analysis/2-6_prepQTL/05_cleanup.R
-./analysis/2-6_prepQTL/05_cleanup.R
+dos2unix ./analysis/2-6_prepQTL/05_cleanup.sh
+chmod +x ./analysis/2-6_prepQTL/05_cleanup.sh
+./analysis/2-6_prepQTL/05_cleanup.sh
 ```
