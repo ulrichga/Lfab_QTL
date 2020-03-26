@@ -1,9 +1,10 @@
 # Parepare input for QTL-analysis with R/qtl
 To run this part of the analysis execute the following steps.
 ## Step 1
-Make sure the necessary input data are available _(this List is incomplete)_
+Make sure the necessary input data are available
 * Phenotype data ./data/crossing_data/F3_colonies_25-04-2019.txt
 * The MSTinput file ./results/linkage_mapping/MSTinput.txt
+* The edited distance matrix (linkage map) ./results/linkage_mapping/MSToutput_edited.txt
 ## Step 2
 Install the R-packages that are necessary for this analysis. The following R-packages will be used:
 * [pscl](https://github.com/atahk/pscl/) (Jackman, 2020)
