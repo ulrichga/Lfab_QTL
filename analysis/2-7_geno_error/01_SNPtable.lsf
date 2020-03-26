@@ -1,0 +1,15 @@
+#!/bin/bash
+#BSUB -J "ctrl_SNPtable"
+#BSUB -W 1:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=20]"
+
+## Load necessary modules
+module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.9
+
+## Compress and index the vcf file
+bgzip -c ./results/geno_error/control_QTL_markers.recode.vcf > ./results/geno_error/control_QTL_markers.vcf.gz
+tabix -p vcf ./results/geno_error/control_QTL_markers.vcf.gz
+
+## Create a SNP table from the vcf file with the mapping SNPs and control individuals
+(bcftools query -l ./results/geno_error/control_QTL_markers.vcf.gz | tr "\n" "\t" | sed 's/\t$/\n/' && bcftools query -f '[\t%TGT]\n' ./results/geno_error/control_QTL_markers.vcf.gz | sed 's/^\t//') > ./results/geno_error/ctrlSNPs_n2
