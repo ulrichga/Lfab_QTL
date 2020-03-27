@@ -17,3 +17,10 @@ This script outputs five files:
 * A summary table of the new linkage map ./results/QTLanalysis/linkagemap_summary.txt
 * The actual new linkage map as a table ./results/QTLanalysis/linkagemap_cM.txt
 * The updated R/qtl input file ./results/QTLanalysis/Rqtlin_final.csv
+## Step 2
+Conduct QTL-mapping by running the script 02_QTL_mapping.R. This script runs a single-QTL model using the EM algorithm with nonparametric method.
+```
+dos2unix ./analysis/2-8_QTLanalysis/02_QTL_mapping.R
+bsub -W 1:00 -R "rusage[mem=10000]" "module load new gcc/4.8.2 r/3.5.1
+R --vanilla --slave < ./analysis/2-8_QTLanalysis/02_QTL_mapping.R > out"
+```
