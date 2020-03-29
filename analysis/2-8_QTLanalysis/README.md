@@ -21,6 +21,12 @@ This script outputs five files:
 Conduct QTL-mapping by running the script 02_QTL_mapping.R. This script runs a single-QTL model using the EM algorithm with nonparametric method.
 ```
 dos2unix ./analysis/2-8_QTLanalysis/02_QTL_mapping.R
-bsub -W 1:00 -R "rusage[mem=10000]" "module load new gcc/4.8.2 r/3.5.1
+bsub -W 1:00 -R "rusage[mem=8000]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/2-8_QTLanalysis/02_QTL_mapping.R > out"
 ```
+This script outputs the following files:
+* Plot of LOD scores across all linkage groups ./results/QTLanalysis/LOD_LGall.pdf
+* LOD score plot of the linkage group with the maximum LOD score with highlighted 95% approx. Bayes confidence interval ./results/QTLanalysis/LOD_LGmax_bayesint.pdf
+* A summary table with LOD scores, and intervals ./results/QTLanalysis/QTL_table.txt
+* A genotype x phenotype interaction plot of the marker with maximum LOD score ./results/QTLanalysis/peak_PxG.pdf
+* The summary of a single-QTL model at the location of the maximum peak ./results/QTLanalysis/explained_variance.txt
