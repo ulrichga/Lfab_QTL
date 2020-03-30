@@ -1,0 +1,20 @@
+#!/bin/bash
+#BSUB -J "blast[1-80]%10"
+#BSUB -W 4:00
+#BSUB -n 1
+#BSUB -R "rusage[mem=64]"
+
+## Define jobindex, input files (query) & input directory (in), the database to use and the output directory (out)
+IDX=$LSB_JOBINDEX
+in="./data/Dennis_et_al_2017/fragments/"
+query=`sed -n ${IDX}p <${in}file_list`
+database="./data/waspbase/OGS1.0_20170110_transcripts.fa"
+out="./results/genesearch/"
+
+## Load necessary modules
+module load gcc/4.8.2 gdc blast/2.3.0
+
+## Blast command, gives only the best hit with evalue threshold 1e-5 (tabular format)
+## Output format:
+## query_id subject_id %_identity    aln_length      n_of_mismatches gap_openings    q_start q_end   s_start   s_end   e_value bit_score
+blastn -query ${in}${query} -db ${database} -task blastn -num_threads 2 -evalue 1e-5 -max_target_seqs 1 -out ${out}${query}.vs.OGS.e-5.out.tab -outfmt 6
