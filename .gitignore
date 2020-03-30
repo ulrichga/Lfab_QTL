@@ -13,9 +13,7 @@ results/
 paths.txt
 
 # Exclude the devnotes files that contain code for constructing procedures
-analysis/2-1_demultiplex/devnotes
-analysis/2-2_mapping/devnotes
-analysis/2-6_prepQTL/devnotes
+analysis/*/devnotes
 
 # Remove directory with scritps that should not be uploaded
 additional_scripts/
