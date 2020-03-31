@@ -8,3 +8,8 @@ dos2unix ./analysis/1-1_dominance/01_dominance.R
 bsub -W 1:00 -R "rusage[mem=100]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/1-1_dominance/01_dominance.R > out"
 ```
+
+To cleanup after runninng the R-script, unused output can be removed by typing:
+```
+rm out lsf* Rplots.pdf
+```
