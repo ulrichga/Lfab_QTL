@@ -17,8 +17,8 @@ This script outputs five files:
 * A summary table of the new linkage map ./results/QTLanalysis/linkagemap_summary.txt
 * The actual new linkage map as a table ./results/QTLanalysis/linkagemap_cM.txt
 * The updated R/qtl input file ./results/QTLanalysis/Rqtlin_final.csv
-## Step 2
-Conduct QTL-mapping by running the script 02_QTL_mapping.R. This script runs a single-QTL model using the EM algorithm with nonparametric method.
+## Step 3
+Conduct QTL-mapping by running the script 02_QTL_mapping.R. This script runs a single-QTL model using the EM algorithm with nonparametric method. **This should only be executed if step 2 is finsihed**.
 ```
 dos2unix ./analysis/2-8_QTLanalysis/02_QTL_mapping.R
 bsub -W 1:00 -R "rusage[mem=8000]" "module load new gcc/4.8.2 r/3.5.1
@@ -30,3 +30,8 @@ This script outputs the following files:
 * A summary table with LOD scores, and intervals ./results/QTLanalysis/QTL_table.txt
 * A genotype x phenotype interaction plot of the marker with maximum LOD score ./results/QTLanalysis/peak_PxG.pdf
 * The summary of a single-QTL model at the location of the maximum peak ./results/QTLanalysis/explained_variance.txt
+## Step 4
+Instead of running a cleanup script, simply remove the R-console output produced in this part of the analysis.
+```
+rm out
+```
