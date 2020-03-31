@@ -1,14 +1,14 @@
 #################################################################################################################################
 #
 # Analysis of the dominance relationships experiment.
-# 
+#
 #################################################################################################################################
 
 # 0. Set Lfab_QTL as working directory if necessary #############################################################################
 # setwd("./Lfab_QTL")
 
 # 1. Open the dominance_first_gen dataset #######################################################################################
-gen1 <- read.table("./data/dominance_first_gen.txt", header=TRUE)
+gen1 <- read.table("./data/dominance/dominance_first_gen.txt", header=TRUE)
 
 # 2. Subset the data frame... ###################################################################################################
 #    ...to only contain the variables "treatment", "n_daughters", "n_sons" and "n_nymphs" and the observations where
@@ -35,7 +35,10 @@ arrows(x0=foo,y0=t(means)+t(sems),y1=t(means)-t(sems),angle=90,code=3,length=0.1
 if(!("./results" %in% list.dirs("."))){
   dir.create("./results")
 }
-pdf("./results/dominance_offspringbarplot.pdf")
+if(!("./results/dominance" %in% list.dirs("."))){
+  dir.create("./results/dominance")
+}
+pdf("./results/dominance/dominance_offspringbarplot.pdf")
 barplot(t(means)[c("n_daughters", "n_sons"),], ylim=c(0,12), beside=T) # barplot mean offspring numbers
 legend("topright",legend=c("daughters","sons"), pch=22, pt.bg=c("gray20","gray80"), pt.cex=2, bty="n")
 arrows(x0=foo,y0=t(means)+t(sems),y1=t(means)-t(sems),angle=90,code=3,length=0.1)
@@ -64,7 +67,7 @@ colnames(firstgen_summary) <- c("cross", "n_crosses", "n_with_female_offspring",
                                 "n_with_male_offspring", "mean_male_offspring", "sem_male_offspring", "median_male_offspring")
 
 #    Output the summary dataset
-write.table(firstgen_summary, file="./results/dominance_firstgen_summary.txt", quote=FALSE, row.names=FALSE, sep="\t")
+write.table(firstgen_summary, file="./results/dominance/dominance_firstgen_summary.txt", quote=FALSE, row.names=FALSE, sep="\t")
 
 # 4. Compare offspring numbers between crosses ##################################################################################
 
@@ -79,7 +82,7 @@ for(i in rownames(female.wilcox.pval)){ # compare all rows
 }
 
 #    Output p-values
-write.table(female.wilcox.pval, file="./results/dominance_firstgen_wilcoxtests.txt", quote=FALSE, sep="\t")
+write.table(female.wilcox.pval, file="./results/dominance/dominance_firstgen_wilcoxtests.txt", quote=FALSE, sep="\t")
 
 # 5. Compare sex ratio between crosses with offspring ###########################################################################
 #    Subset the data frame to contain only data from colonies with offspring
@@ -97,6 +100,6 @@ sglm2 <- glm(y_mtrx ~ sex_ratio_data$treatment, family="quasibinomial")
 summary(sglm2) # still not significant
 
 #    Output summary of the quasibinomial model to analyse sex ratio
-sink("./results/dominance_firstgen_sexglm.txt")
+sink("./results/dominance/dominance_firstgen_sexglm.txt")
 summary(sglm2)
 sink()
