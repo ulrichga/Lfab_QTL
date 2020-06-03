@@ -84,6 +84,20 @@ for(i in rownames(female.wilcox.pval)){ # compare all rows
 #    Output p-values
 write.table(female.wilcox.pval, file="./results/dominance/dominance_firstgen_wilcoxtests.txt", quote=FALSE, sep="\t")
 
+#    Repeat for the test statistic
+female.wilcox.wval <- data.frame(RRxR=c(NA,NA,NA,NA), RRxS=c(NA,NA,NA,NA), SSxR=c(NA,NA,NA,NA), SSxS=c(NA,NA,NA,NA))
+rownames(female.wilcox.wval) <- c("RRxR", "RRxS", "SSxR", "SSxS")
+for(i in rownames(female.wilcox.wval)){ # compare all rows
+  for(j in colnames(female.wilcox.wval)){ # with all columns
+    # Save the P-values in the data frame female.wilcox.wval (comparing two groups of 0's returns NaN)
+    female.wilcox.wval[i,j] <- wilcox.test(gen1[gen1[,"treatment"]==i,"n_daughters"], gen1[gen1[,"treatment"]==j,"n_daughters"])$statistic
+  }
+}
+
+#    Output W-values
+write.table(female.wilcox.wval, file="./results/dominance/dominance_firstgen_wilcoxtests_W.txt", quote=FALSE, sep="\t")
+
+
 # 5. Compare sex ratio between crosses with offspring ###########################################################################
 #    Subset the data frame to contain only data from colonies with offspring
 sex_ratio_data <- gen1[gen1[,"n_daughters"]+gen1[,"n_sons"]>0,]
