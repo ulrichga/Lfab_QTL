@@ -62,6 +62,49 @@ plot(qtlin_em, chr=peakchr, add=TRUE, incl.markers=F, col="#08306B")
 abline(h=sigthres_0.05)
 dev.off()
 
+# Plot all chromosomes but with highlighting the bayesian confidence interval and export it as a pdf file
+pdf("./results/QTLanalysis/lod_LGall_bayesint.pdf", width = 14)
+# Construct the plot without content
+plot(qtlin_em, ylab="LOD score", xlab="Linkage group", type="n", incl.markers = FALSE)
+# Calculate offset for each chromosome as a vector. this vector contains the starting point of each chromosome
+# Offset is (spacer)*(chromosome_id-1)+sum_of_previous_chr_sizes
+spacer <- 25
+offset <- rep(NA, nchr(qtlin))
+chr_sizes <- c()
+for(i in 1:nchr(qtlin)){
+  chr_sizes <- c(chr_sizes, qtlin_em[qtlin_em[,"pos"]==max(qtlin_em[as.numeric(qtlin_em$chr) == i,"pos"]),"pos"])
+}
+for (i in 1:nchr(qtlin)){
+  if(i==1){
+    offset[i] <- 0
+  }
+  if(i>1){
+    sum_of_previous_chr_sizes <- sum(chr_sizes[0:(i-1)])
+    offset[i] <- spacer*(i-1)+sum_of_previous_chr_sizes
+  }
+}
+# Add the (bayes 95%) confidence interval as a polygon with x and y corrdinates called xcoords and ycoords
+xcoords <- qtlin_em[qtlin_em[,"pos"]>=pos1 & qtlin_em[,"pos"]<=pos2 & qtlin_em[,"chr"]==peakchr, "pos"]
+xcoords <- c(min(xcoords), xcoords, max(xcoords))
+xcoords <- xcoords + offset[as.numeric(peakchr)]
+ycoords <- qtlin_em[qtlin_em[,"pos"]>=pos1 & qtlin_em[,"pos"]<=pos2 & qtlin_em[,"chr"]==peakchr, "lod"]
+ycoords <- c(-10, ycoords, -10)
+polygon(xcoords, ycoords, border="#9ECAE1", col="#9ECAE1")
+# overlay the lod-scores and sig-threshold
+plot(qtlin_em, col="#08306B", add=TRUE)
+box()
+abline(h=sigthres_0.05)
+# include marker positions
+realmarkers <- qtlin_em[grep("tig", row.names(qtlin_em)),]
+markerpos_plot <- realmarkers$pos + offset[as.numeric(realmarkers$chr)]
+rug(markerpos_plot)
+# Add a "legend" to indicate map scale
+x <- (offset[6]+chr_sizes[6]/2)-100
+y <- 3.5
+arrows(x, y, x+100, y, angle=90, length=0.05, code=3)
+text(x+50, y, "100 cM", pos=1)
+dev.off()
+
 # Estimate the variance explained by the peak position
 peakpos <- as.numeric(summary(qtlin_em, perms=qtlin_perm, alpha=0.05, pvalues = T)[,2]) # save the peak position
 qtlin <- sim.geno(qtlin, step=0.1, n.draws=256, error.prob=genoerror)
