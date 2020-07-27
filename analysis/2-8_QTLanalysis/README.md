@@ -21,7 +21,7 @@ This script outputs five files:
 Conduct QTL-mapping by running the script 02_QTL_mapping.R. This script runs a single-QTL model using the EM algorithm with nonparametric method. **This should only be executed if step 2 is finsihed**.
 ```
 dos2unix ./analysis/2-8_QTLanalysis/02_QTL_mapping.R
-bsub -W 1:00 -R "rusage[mem=8000]" "module load new gcc/4.8.2 r/3.5.1
+bsub -W 1:00 -R "rusage[mem=32000]" "module load new gcc/4.8.2 r/3.5.1
 R --vanilla --slave < ./analysis/2-8_QTLanalysis/02_QTL_mapping.R > out"
 ```
 This script outputs the following files:

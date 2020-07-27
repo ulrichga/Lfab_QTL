@@ -152,7 +152,7 @@ par(opar)
 
 # Estimate the variance explained by the peak position
 peakpos <- as.numeric(summary(qtlin_em, perms=qtlin_perm, alpha=0.05, pvalues = T)[,2]) # save the peak position
-qtlin <- sim.geno(qtlin, step=0.1, n.draws=256, error.prob=genoerror)
+qtlin <- sim.geno(qtlin, step=0.1, n.draws=1000, error.prob=genoerror)
 qtl <- makeqtl(qtlin, chr=peakchr, pos=peakpos)
 out.fq <- fitqtl(qtlin, qtl=qtl, formula=y~Q1)
 sink("./results/QTLanalysis/explained_variance.txt")
