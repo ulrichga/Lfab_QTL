@@ -43,6 +43,13 @@ pdf("./results/QTLanalysis/linkagemap.pdf")
 plotMap(newmap)
 dev.off()
 
+# Output as SVG in different format
+svg("./results/QTLanalysis/linkagemap_lab1.5_axis1.25_marmod_format5.svg", height=5, width=5)
+opar <- par(cex.lab=1.5, cex.axis=1.25, mar=c(5.1, 5.1, 0.1, 0.1))
+plotMap(newmap, main="")
+dev.off()
+par(opar)
+
 # Output a summary of the new map
 mapsummary <- summaryMap(newmap)
 linkagegroup <- row.names(summaryMap(newmap))
