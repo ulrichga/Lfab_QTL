@@ -45,8 +45,8 @@ peakchr <- qtlin_em[which.max(qtlin_em[,"lod"]),"chr"]
 pos1 <- lodint(qtlin_em, peakchr, 1.5)[1,2]
 pos2 <- lodint(qtlin_em, peakchr, 1.5)[3,2]
 lodint_markers <- qtlin_em[qtlin_em[,"chr"]==peakchr&qtlin_em[,"pos"]>=pos1&qtlin_em[,"pos"]<=pos2,]
-pos1 <- bayesint(qtlin_em, peakchr, 0.95)[1,2]
-pos2 <- bayesint(qtlin_em, peakchr, 0.95)[3,2]
+pos1 <- bayesint(qtlin_em, peakchr, prob=0.95)[1,2]
+pos2 <- bayesint(qtlin_em, peakchr, prob=0.95)[3,2]
 bayesint_markers <- qtlin_em[qtlin_em[,"chr"]==peakchr&qtlin_em[,"pos"]>=pos1&qtlin_em[,"pos"]<=pos2,]
 
 # Plot the peak chromosome with the bayesian confidence interval and export it as a pdf file
