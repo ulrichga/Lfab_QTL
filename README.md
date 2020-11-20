@@ -34,6 +34,7 @@ The following files (results) are additionally included to aid reproducibility a
 * ./results/QTLanalysis/Rqtlin_final.csv (table with genotypes and phenotypes used for the QTL analysis with the script ./analysis/2-8_QTLanalysis/02_QTL_mapping.R)
 * ./results/genesearch/candidate_genes.txt (table with genes in the candidate region)
 * ./results/SNPcall/raw.vcf.gz (unfiltered vcf file, **only included in the Dryad version**)
+* ./results/geno_error/individual_genotype_comparisons.txt (summary file of genotyping error)
 
 ### Manuals to follow
 The descriptions in the following README.md files should be executed in the following order:
@@ -41,11 +42,11 @@ The descriptions in the following README.md files should be executed in the foll
 2. ./analysis/2-1_demultiplex/README.md (Can be skipped. Requires undemultiplexed raw reads which are not publicly available)
 3. ./analysis/2-2_mapping/README.md
 4. ./analysis/2-3_SNPcall/README.md
-5. ./analysis/2-4_SNPfilter/README.md
+5. ./analysis/2-4_SNPfilter/README.md (Possible to start here, when the ./results/SNPcall/raw.vcf.gz is available)
 6. ./analysis/2-5_linkagemap/README.md
 7. ./analysis/2-6_prepQTL/README.md
 8. ./analysis/2-7_geno_error/README.md
-9. ./analysis/2-8_QTLanalysis/README.md
+9. ./analysis/2-8_QTLanalysis/README.md (Possible to start here)
 10. ./analysis/2-9_genesearch/README.md
 
 ### Results

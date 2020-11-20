@@ -18,6 +18,9 @@ results/QTLanalysis/*
 !results/genesearch
 results/genesearch/*
 !results/genesearch/candidate_genes.txt
+!results/geno_error
+results/geno_error/*
+!results/geno_error/individual_genotype_comparisons.txt
 
 # Exclude file with local paths
 paths.txt
