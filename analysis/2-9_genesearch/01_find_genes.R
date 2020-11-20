@@ -47,5 +47,12 @@ candidate_genes$LOD_closest <- sapply(1:nrow(candidate_genes), FUN=function(x){
   samescaffoldmarkers[which.min(abs(samescaffoldmarkers[,"position_bp"] - candidate_genes[x,"midpoint"])),c("lod")]
 })
 
+# The confidence region touches only one scaffold. On that scaffold, the only flanking marker is at tig00000002 311170.
+# All positinos upward of it are in the candidate region.
+QTL[QTL[,"scaffold"]=="tig00000002",]
+
+# Subset the candidate genes to those upstream of tig00000002 311170
+candidate_genes <- candidate_genes[candidate_genes[,"midpoint"] > 311170,]
+
 # Output the candidate genes list
 write.table(candidate_genes, "./results/genesearch/candidate_genes.txt", col.names=TRUE, row.names=FALSE, quote=FALSE, sep="\t")

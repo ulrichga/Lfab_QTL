@@ -24,3 +24,8 @@ analysis/*/devnotes
 
 # Remove directory with scritps that should not be uploaded
 additional_scripts/
+
+# Exclude steps assigning Alice's transcripts to candidate genes
+./analysis/2-9_genesearch/02*
+./analysis/2-9_genesearch/03*
+./analysis/2-9_genesearch/04*

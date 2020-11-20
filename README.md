@@ -7,7 +7,7 @@ The scripts of these analyses are optimized to run on the [ETH Euler cluster](ht
 ## Reproducing the analysis
 To reproduce these analyses do the following:
 1. Copy the Lfab_QTL directory to a system where you want to reproduce the analyses (preferentially Euler or a similar HPC cluster).
-2. Make sure you have the necessary raw data available in ./data and/or ./results (For an overview of these files, see [Required data](https://github.com/ulrichga/Lfab_QTL#Required-data)).
+2. Make sure you have the necessary raw data available in ./data and/or ./results (For an overview of these files, see [Required files](https://github.com/ulrichga/Lfab_QTL#Required-files)).
 3. Run the analyses by follwing the steps described in the README.md files (For the correct order of README.md files, see [Manuals to follow](https://github.com/ulrichga/Lfab_QTL#Manuals-to-follow))
 
 ### Required files
@@ -21,14 +21,11 @@ The analysis can only be reproduced if the required raw data are available in an
 * ./results/demultiplexed/\*.fq.gz (These 384 files of demultiplexed Illumina raw reads from 384 wasp samples are available under PRJEB39724 in the [European Nucleotide Archive](https://www.ebi.ac.uk/ena/browser/home))
 #### Currently not publicly available
 * ./data/rawreads/20191118.A-GU_ddRAD_ID_\*.fastq.gz (These 24 files of undemultiplexed Illumina raw reads from 384 wasp samples are only necessary to reproduce the demultiplexing)
-* ./data/genome/regions/split.freebayes.regions.file.pl (script used to generat genomic regions prior to SNP calling)
+* ./data/genome/regions/split.freebayes.regions.file.pl (script used to generate genomic regions prior to SNP calling)
 #### Available from other authors
 * ./data/01.Linkage_groups.txt ([additional file 3](https://static-content.springer.com/esm/art%3A10.1186%2Fs12864-020-6764-0/MediaObjects/12864_2020_6764_MOESM3_ESM.xlsx) from [Dennis et al. (2020)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6764-0), in tab-separated txt-file format)
-* ./data/Dennis_et_al_2017/evo13333-sup-0005-datas2.H76vsH-\_comparison (comparisons of transcript expression between H76 and H- adapted wasp lines from [Dennis et al. (2017)](https://onlinelibrary.wiley.com/doi/pdf/10.1111/evo.13333))
 * ./data/genome/Lf_genome_V1.0.fa (reference genome described in [Dennis et al. (2020)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6764-0) and available on [bipaa](https://bipaa.genouest.org/sp/lysiphlebus_fabarum/download/genome/v1.0/))
 * ./data/waspbase/OGS1.0_20170110.gff3 (annotations from [bipaa](https://bipaa.genouest.org/sp/lysiphlebus_fabarum/download/annotation/v1.0/))
-* ./data/waspbase/OGS1.0_20170110_transcripts.fa (transcripts from [bipaa](https://bipaa.genouest.org/sp/lysiphlebus_fabarum/download/annotation/v1.0/))
-* ./data/Dennis_et_al_2017/01.Lfab.Trinity.denovo.fasta (transcripts from [Dennis et al. (2017)](https://onlinelibrary.wiley.com/doi/pdf/10.1111/evo.13333))
 * ./data/genome/regions/fasta_generate_regions.py (script from the freebayes distribution [(Garrison and Marth 2012)](https://arxiv.org/abs/1207.3907) available on [GitHub](https://github.com/ekg/freebayes/blob/master/scripts/fasta_generate_regions.py))
 
 ### Additional files
