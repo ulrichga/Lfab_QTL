@@ -5,7 +5,7 @@
 .Ruserdata
 *.Rproj
 
-# Exclude some of the data and results
+# Exclude some of the data and results, but include the input file for QTL analysis, the linkage map and the candidate genes.
 data/*
 !data/barcodes
 !data/crossing_data
@@ -15,6 +15,9 @@ results/*
 results/QTLanalysis/*
 !results/QTLanalysis/Rqtlin_final.csv
 !results/QTLanalysis/linkagemap_cM.txt
+!results/genesearch
+results/genesearch/*
+!results/genesearch/candidate_genes.txt
 
 # Exclude file with local paths
 paths.txt
@@ -24,8 +27,3 @@ analysis/*/devnotes
 
 # Remove directory with scritps that should not be uploaded
 additional_scripts/
-
-# Exclude steps assigning Alice's transcripts to candidate genes
-./analysis/2-9_genesearch/02*
-./analysis/2-9_genesearch/03*
-./analysis/2-9_genesearch/04*
