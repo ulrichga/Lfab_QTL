@@ -29,7 +29,7 @@ The analysis can only be reproduced if the required raw data are available in an
 * ./data/genome/regions/fasta_generate_regions.py (script from the freebayes distribution [(Garrison and Marth 2012)](https://arxiv.org/abs/1207.3907) available on [GitHub](https://github.com/ekg/freebayes/blob/master/scripts/fasta_generate_regions.py))
 
 ### Additional files
-The following files are additionally included to aid reproducibility and use of the data.
+The following files (results) are additionally included to aid reproducibility and use of the data.
 * ./results/QTLanalysis/linkagemap_cM.txt (linkage map / distance matrix with mapping unit in cM)
 * ./results/QTLanalysis/Rqtlin_final.csv (table with genotypes and phenotypes used for the QTL analysis with the script ./analysis/2-8_QTLanalysis/02_QTL_mapping.R)
 * ./results/genesearch/candidate_genes.txt (table with genes in the candidate region)
