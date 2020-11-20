@@ -1,5 +1,5 @@
 # Lfab_QTL
-This repository is part of a research project on the genomic architecture of symbiont-conferred resistance in _Lysiphlebus fabarum_. The purpose of this repository is to provide a reproducible analysis pipeline for for this project. A version of it is available on Dryad and one is available on [GitHub](https://github.com/ulrichga/Lfab_QTL).
+This repository is part of a research project on the genomic architecture of symbiont-conferred resistance in _Lysiphlebus fabarum_. The purpose of this repository is to provide a reproducible analysis pipeline for for this project. A version of it will be available on Dryad and one is available on [GitHub](https://github.com/ulrichga/Lfab_QTL).
 
 ## General info
 The scripts of these analyses are optimized to run on the [ETH Euler cluster](https://scicomp.ethz.ch/wiki/Euler). Reproducing the analysis on Euler should therefore work smoothly, while adaptation for other platforms may require modification of the scripts. All scripts assume that your current directory is Lfab_QTL.
