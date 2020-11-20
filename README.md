@@ -19,9 +19,9 @@ The analysis can only be reproduced if the required raw data are available in an
 * ./data/crossing_data/\*.txt (raw data from the second experiment, 4 files with information on wasp crossing for QTL mapping)
 #### Available own datasets
 * ./results/demultiplexed/\*.fq.gz (These 384 files of demultiplexed Illumina raw reads from 384 wasp samples are available under PRJEB39724 in the [European Nucleotide Archive](https://www.ebi.ac.uk/ena/browser/home))
-#### Currently not publicly available
+#### Available upon request
 * ./data/rawreads/20191118.A-GU_ddRAD_ID_\*.fastq.gz (These 24 files of undemultiplexed Illumina raw reads from 384 wasp samples are only necessary to reproduce the demultiplexing)
-* ./data/genome/regions/split.freebayes.regions.file.pl (script used to generate genomic regions prior to SNP calling)
+* ./data/genome/regions/split.freebayes.regions.file.pl (script provided by the [GDC](https://gdc.ethz.ch/) at ETH, used to generate genomic regions prior to SNP calling)
 #### Available from other authors
 * ./data/01.Linkage_groups.txt ([additional file 3](https://static-content.springer.com/esm/art%3A10.1186%2Fs12864-020-6764-0/MediaObjects/12864_2020_6764_MOESM3_ESM.xlsx) from [Dennis et al. (2020)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6764-0), in tab-separated txt-file format)
 * ./data/genome/Lf_genome_V1.0.fa (reference genome described in [Dennis et al. (2020)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6764-0) and available on [bipaa](https://bipaa.genouest.org/sp/lysiphlebus_fabarum/download/genome/v1.0/))
@@ -33,6 +33,7 @@ The following files (results) are additionally included to aid reproducibility a
 * ./results/QTLanalysis/linkagemap_cM.txt (linkage map / distance matrix with mapping unit in cM)
 * ./results/QTLanalysis/Rqtlin_final.csv (table with genotypes and phenotypes used for the QTL analysis with the script ./analysis/2-8_QTLanalysis/02_QTL_mapping.R)
 * ./results/genesearch/candidate_genes.txt (table with genes in the candidate region)
+* ./results/SNPcall/raw.vcf.gz (unfiltered vcf file, **only included in the Dryad version**)
 
 ### Manuals to follow
 The descriptions in the following README.md files should be executed in the following order:

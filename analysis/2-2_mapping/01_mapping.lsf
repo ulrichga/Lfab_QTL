@@ -5,6 +5,8 @@
 #BSUB -W 6:00
 #BSUB -R "rusage[scratch=3000]"
 
+## Mapping script, created by Niklaus Zemp (GDC).
+## Modified by Gabriel Ulrich
 
 ## Define paths.
 in="./results/demultiplexed/"

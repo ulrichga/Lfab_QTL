@@ -12,7 +12,7 @@ chmod +x ./analysis/2-2_mapping/00_initialize.sh
 ./analysis/2-2_mapping/00_initialize.sh
 ```
 ## Step 3
-Run the 01_mapping.lsf script to map reads against the reference genome with *BWA-MEM*. It also performs quality filtering for a quality score of 10 and creates necessary directories. At the end, it summarizes the coverage information for each individual. **This script should only be executed if the batch job created in step 2 is finished**.
+Run the 01_mapping.lsf script. This script was provided by Dr. Niklaus Zemp ([GDC](https://gdc.ethz.ch/)). It maps reads against the reference genome with *BWA-MEM*, performs quality filtering for a quality score of 10 and creates necessary directories. At the end, it summarizes the coverage information for each individual. **This script should only be executed if the batch job created in step 2 is finished**.
 ```
 dos2unix ./analysis/2-2_mapping/01_mapping.lsf
 bsub < ./analysis/2-2_mapping/01_mapping.lsf

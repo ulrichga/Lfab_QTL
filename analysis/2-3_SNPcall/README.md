@@ -23,7 +23,7 @@ dos2unix ./analysis/2-3_SNPcall/01_index_bamfiles.lsf
 bsub < ./analysis/2-3_SNPcall/01_index_bamfiles.lsf
 ```
 ## Step 4
-Run the 02_freebayes.lsf script to call SNPs. **This script should only be executed if steps 2 and 3 are finished**.
+Run the 02_freebayes.lsf script to call SNPs. This script uses parameters from the [dDocent pipeline](https://www.ddocent.com/) (Puritz et al., [2014a](https://peerj.com/articles/431/), [2014b](https://onlinelibrary.wiley.com/doi/full/10.1111/mec.12965)). **This script should only be executed if steps 2 and 3 are finished**.
 ```
 dos2unix ./analysis/2-3_SNPcall/02_freebayes.lsf
 bsub < ./analysis/2-3_SNPcall/02_freebayes.lsf

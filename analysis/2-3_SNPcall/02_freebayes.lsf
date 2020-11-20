@@ -4,6 +4,8 @@
 #BSUB -n 1
 #BSUB -R "rusage[mem=6000]"
 
+## Variant calling script with parameters based on the dDocent pipeline (https://www.ddocent.com/)
+
 ## Define paths
 in="./results/SNPcall/"
 genome="./data/genome/"
