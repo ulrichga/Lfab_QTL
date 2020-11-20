@@ -5,9 +5,16 @@
 .Ruserdata
 *.Rproj
 
-# Exclude data and results directories
-data/
-results/
+# Exclude some of the data and results
+data/*
+!data/barcodes
+!data/crossing_data
+!data/dominance
+results/*
+!results/QTLanalysis
+results/QTLanalysis/*
+!results/QTLanalysis/Rqtlin_final.csv
+!results/QTLanalysis/linkagemap_cM.txt
 
 # Exclude file with local paths
 paths.txt

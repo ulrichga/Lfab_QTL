@@ -1,0 +1,50 @@
+####################															
+#	DATA INFO														
+#	MScThesis Gabriel Ulrich on genetic architecture of counteradaptation to symbiont-conferred resistance														
+#	Data sheet with information on colonies that were established to asses dominance relationships of the wasps counteradaptation. This sheet is about the second generation of wasps used in this experiment. Colonies consist of a plant with aphids on it to which a Lysiphlebus wasp (female) was added. Colonies were established by adding adult aphids to +/- 10 d old Vicia faba plants and leaving them on the plant for a few days (see dates in the data frame to reconstruct exact timing). After adult aphids were removed, a wasp was added to the plant. Wasps were removed approx. 24 h after adding them. Offspring of the wasp was counted after enclosing the colony in a  cellophane bag and drying it until the offspring wasps emerged and died.														
+#	Version Nr. 06-03-2020.														
+####################															
+#	VARIBALE NAMES														
+#	colony_ID	colonies (i.e. plants with aphids) were numbered continuously after counting aphid nymphs. This number is their ID. This was continued after the first generation.													
+#	parent_colony_ID	the ID number (colony_ID) of the parents of the individual that was added to the second generation colony.													
+#	n_nymphs	number of nymphs counted prior to adding wasps to colonies													
+#	n_daughters	number of females that were found when counting offspring													
+#	n_sons	number of males that were found when counting offspring													
+#	n_mummies	number of mummies that were found when counting offspring													
+#	n_aphids_removed	number of adult aphids that were removed from the colonies (the aim was to remove 4 because 4 were added. However, it was often not possible to find all 4.)													
+#	n_wasps_released	number of wasps that were added to the colony. This is 1 for all not-excluded aphid colonies. This individual was always a female because this second generation experiment is done with virgin females. Adding wasps to colonies was always done on the same day as the adult aphids were removed (date_aphids_removed).													
+#	date_sown	date on which the plant was sown													
+#	date_aphids_added	date on which adult aphids were added to the plant to establish an aphid colony													
+#	date_aphids_removed	date on which adult aphids were removed from the plant													
+#	date_wasps_removed	date on which wasps were removed. This was always done approx. 24 h after adding them.													
+#	female_status	whether the female wasp was found dead or alive when it was removed from the colony.													
+#	female_location	whether the female wasp was found in the plant headspace (plant) or in the eppendorf tube (tube) when it was removed.													
+#	female_removed	"number of female wasps that were removed from the colony. 0 = none were removed, i.e. the wasp that was added was not found; 1 = one was removed i.e. the wasp that was added was found and removed."													
+#	notes	occasional additional notes. E.g. if the plant was excluded because it had <= 10 aphid nymphs on it.													
+####################															
+colony_ID	parent_colony_ID	n_nymphs	n_daughters	n_sons	n_mummies	n_aphids_removed	n_wasps_released	date_sown	date_aphids_added	date_aphids_removed	date_wasps_removed	female_status	female_location	female_removed	notes
+1	12	13	0	0	0	3	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+2	36	28	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+3	36	36	0	0	0	3	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+4	5	26	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	0	NA
+5	22	20	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+6	56	16	0	0	0	3	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+7	12	14	0	0	0	2	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+8	42	11	0	0	0	2	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+9	NA	10	NA	NA	NA	1	0	01.02.2019	10.02.2019	12.02.2019	NA	NA	NA	NA	EXCLUDED
+10	NA	6	NA	NA	NA	4	0	01.02.2019	10.02.2019	12.02.2019	NA	NA	NA	NA	EXCLUDED
+11	30	23	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+12	22	11	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	dead	tube	1	NA
+13	NA	4	NA	NA	NA	4	0	01.02.2019	10.02.2019	12.02.2019	NA	NA	NA	NA	EXCLUDED
+14	NA	1	NA	NA	NA	0	0	01.02.2019	10.02.2019	12.02.2019	NA	NA	NA	NA	EXCLUDED
+15	51	23	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+16	42	21	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+17	NA	1	NA	NA	NA	2	0	01.02.2019	10.02.2019	12.02.2019	NA	NA	NA	NA	EXCLUDED
+18	36	12	0	0	0	3	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+19	5	38	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+20	51	21	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	tube	1	NA
+21	5	35	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+22	30	40	0	0	0	4	1	01.02.2019	10.02.2019	12.02.2019	13.02.2019	alive	plant	1	NA
+23	58	24	0	0	0	4	1	01.02.2019	11.02.2019	13.02.2019	14.02.2019	alive	plant	1	NA
+24	66	11	0	0	0	3	1	01.02.2019	11.02.2019	13.02.2019	14.02.2019	alive	plant	1	NA
+25	66	14	0	0	0	2	1	01.02.2019	11.02.2019	13.02.2019	14.02.2019	alive	tube	1	NA

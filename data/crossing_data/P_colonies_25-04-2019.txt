@@ -1,0 +1,72 @@
+####################																		
+#	DATA INFO																	
+#	MScThesis Gabriel Ulrich on genetic architecture of counteradaptation to symbiont-conferred resistance																	
+#	Data sheet with information on P-generation colonies. Colonies consist of a plant with aphids on it to which Lysiphlebus wasps are added. In the end, only offspring from the colony nr. 1 was used. Colonies were established by adding adult aphids to +/- 10 d old Vicia faba plants and leaving them on the plant for a few days (see dates in the data frame to reconstruct exact timing). After adult aphids were removed, a pair of wasps was added to the plant. Wasps were brought together in the tube ~30 minutes prior to adding them to the plant to facilitate mating. 																	
+#	Version Nr. 25-04-2019																	
+####################																		
+#	VARIBALE NAMES																	
+#	colony_ID	Unique ID number of the established aphid colony																
+#	n_nymphs	Number of nymphs that were counted in the respective aphid colony prior to wasp addition																
+#	female_origin	"Origin of the female wasp that was added to the colony (H+ refers to the H76 adapted strain, H- to the ""control"" strain that is adapted to Hamiltonella free aphid clones and numbers refer to colony ID's)"																
+#	male_origin	"Origin of the male wasp that was added to the colony (H+ refers to the H76 adapted strain, H- to the ""control"" strain that is adapted to Hamiltonella free aphid clones and numbers refer to colony ID's)"																
+#	date_sown	Date at which the plant was sown																
+#	date_aphids_added	Date at which adult aphids were added to reproduce on the plant and start a colony																
+#	n_aphids_added	Number of adult aphids that were added to reproduce on the plant and start a colony																
+#	date_aphids_removed	Date at which adult aphids were removed to stop reproduction and limit the number of nymphs on the plant																
+#	n_aphids_removed	Number of adult aphids that were removed to stop reproduction and limit the number of nymphs on the plant. If this is not in accordance with n_aphids_added, this means that some aphids got lost (usually because they die) or that acidentally more were transferred than planned.																
+#	date_wasps_added	Date at which parasitoid wasps were added to the colony to let them reproduce																
+#	n_wasps_added	Number of parasitoid wasps that were added to the colony to let them reproduce (2 means a male and a female was added)																
+#	date_wasps_removed	Date at which parasitoid wasps were removed from the colony for storage and later DNA analysis																
+#	n_females_removed	Number of female parasitoid wasps that were removed from the colony																
+#	n_males_removed	Number of male parasitoid wasps that were removed from the colony																
+#	female_status	Whether the removed female is alive or dead																
+#	male_status	Whether the removed male is alive or dead																
+#	female_location	Whether the female was found in the tube or in the plant headspace (i.e. not in the headspace of the plant but in the eppendorf tube)																
+#	n_mummies_isolated	Number of mummies that were isolated from the colony for use in subsequent generations																
+#	notes	Additional notes																
+####################																		
+colony_ID	n_nymphs	female_origin	male_origin	date_sown	date_aphids_added	n_aphids_added	date_aphids_removed	n_aphids_removed	date_wasps_added	n_wasps_added	date_wasps_removed	n_females_removed	n_males_removed	female_status	male_status	female_location	n_mummies_isolated	notes
+1	NA	H-	H+	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	1	1	alive	alive	NA	39	NA
+2	NA	H-	H+	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	0	0	NA	NA	NA	0	NA
+3	NA	H-	H+	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	1	0	alive	NA	NA	0	NA
+4	NA	H-	H+	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	1	1	alive	alive	NA	20	NA
+5	NA	H+	H-	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	1	1	alive	dead	NA	0	NA
+6	NA	H+	H-	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	0	0	NA	NA	NA	0	NA
+7	NA	H+	H-	01.02.2019	10.02.2019	4	12.02.2019	4	12.02.2019	2	14.02.2019	1	0	alive	NA	NA	0	NA
+8	NA	H+	H-	01.02.2019	10.02.2019	4	12.02.2019	3	12.02.2019	2	14.02.2019	1	1	alive	alive	NA	14	NA
+9	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+10	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+11	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+12	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+13	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+14	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	3	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+15	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+16	NA	NA	NA	01.02.2019	10.02.2019	4	12.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+17	>30	H-	H+	01.02.2019	10.02.2019	4	13.02.2019	4	13.02.2019	2	14.02.2019	1	1	alive	alive	NA	0	NA
+18	>50	H-	H+	01.02.2019	10.02.2019	4	13.02.2019	4	13.02.2019	2	14.02.2019	1	1	alive	alive	NA	2	NA
+19	>30	NA	NA	01.02.2019	10.02.2019	4	13.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+20	>30	NA	NA	01.02.2019	10.02.2019	4	13.02.2019	4	NA	0	NA	NA	NA	NA	NA	NA	0	NA
+21	>50	H-	H+	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	41	NA
+22	>=50	H-	H+	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+23	NA	H-	H+	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+24	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+25	NA	H-	H+	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+26	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+27	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+28	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	6	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+29	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	5	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+30	NA	H+	H-	01.02.2019	12.02.2019	6	14.02.2019	4	14.02.2019	2	15.02.2019	1	1	alive	alive	NA	0	NA
+31	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+32	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	26	NA
+33	NA	H-	H+	NA	04.02.2019	4	15.02.2019	NA	15.02.2019	2	18.02.2019	1	1	dead	alive	NA	0	4_adults_removed_on_07.02.2019_next_generation_of_adults_removed_on_14.02.2019_and_15.02.2019
+34	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	38	NA
+35	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+36	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	5	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	19	NA
+37	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	5	15.02.2019	2	18.02.2019	1	1	alive	alive	NA	0	NA
+38	NA	H-	H+	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	18.02.2019	1	1	alive	alive	NA	0	NA
+39	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+40	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+41	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+42	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	4	15.02.2019	2	16.02.2019	0	1	NA	alive	NA	0	NA
+43	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	5	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA
+44	NA	H+	H-	01.02.2019	12.02.2019	6	15.02.2019	6	15.02.2019	2	16.02.2019	1	1	alive	alive	NA	0	NA

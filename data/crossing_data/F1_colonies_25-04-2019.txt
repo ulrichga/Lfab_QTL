@@ -1,0 +1,101 @@
+####################																		
+#	DATA INFO																	
+#	MScThesis Gabriel Ulrich on genetic architecture of counteradaptation to symbiont-conferred resistance																	
+#	Data sheet with information on F1-generation colonies. Colonies consist of a plant with aphids on it to which Lysiphlebus wasps are added. In the end, only colonies where female wasps came from the P-generation colony with ID 1 were used. Colonies were established by adding adult aphids to +/- 10 d old Vicia faba plants and leaving them on the plant for a few days (see dates in the data frame to reconstruct exact timing). After adult aphids were removed, a single female wasp was added to the plant.																	
+#	Version Nr. 25-04-2019																	
+####################																		
+#	VARIBALE NAMES																	
+#	colony_ID	Unique ID number of the established aphid colony																
+#	n_nymphs	Number of nymphs that were counted in the respective aphid colony prior to wasp addition																
+#	female_origin	"Origin of the female wasp that was added to the colony (H+ refers to the H76 adapted strain, H- to the ""control"" strain that is adapted to Hamiltonella free aphid clones and numbers refer to colony ID's)"																
+#	male_origin	"Origin of the male wasp that was added to the colony (H+ refers to the H76 adapted strain, H- to the ""control"" strain that is adapted to Hamiltonella free aphid clones and numbers refer to colony ID's). In F1-generation colonies, no male wasps were added."																
+#	date_sown	Date at which the plant was sown																
+#	date_aphids_added	Date at which adult aphids were added to reproduce on the plant and start a colony																
+#	n_aphids_added	Number of adult aphids that were added to reproduce on the plant and start a colony																
+#	date_aphids_removed	Date at which adult aphids were removed to stop reproduction and limit the number of nymphs on the plant																
+#	n_aphids_removed	Number of adult aphids that were removed to stop reproduction and limit the number of nymphs on the plant. If this is not in accordance with n_aphids_added, this means that some aphids got lost (usually because they die) or that acidentally more were transferred than planned.																
+#	date_wasps_added	Date at which parasitoid wasps were added to the colony to let them reproduce																
+#	n_wasps_added	Number of parasitoid wasps that were added to the colony to let them reproduce (always 1 in F1-generation colonies)																
+#	date_wasps_removed	Date at which parasitoid wasps were removed from the colony for storage and later DNA analysis																
+#	n_females_removed	Number of female parasitoid wasps that were removed from the colony																
+#	n_males_removed	Number of male parasitoid wasps that were removed from the colony																
+#	female_status	Whether the removed female is alive or dead																
+#	male_status	Whether the removed male is alive or dead																
+#	female_location	Whether the female was found in the tube or in the plant headspace (i.e. not in the headspace of the plant but in the eppendorf tube)																
+#	n_mummies_isolated	Number of mummies that were isolated from the colony for use in subsequent generations																
+#	notes	Additional notes																
+####################																		
+colony_ID	n_nymphs	female_origin	male_origin	date_sown	date_aphids_added	n_aphids_added	date_aphids_removed	n_aphids_removed	date_wasps_added	n_wasps_added	date_wasps_removed	n_females_removed	n_males_removed	female_status	male_status	female_location	n_mummies_isolated	notes
+45	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	22	NA
+46	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	20	NA
+47	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	16	NA
+48	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+49	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+50	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	10	NA
+51	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	3	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	63	NA
+52	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	10	NA
+53	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	0	NA
+54	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	43	NA
+55	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	3	25.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+56	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	32	NA
+57	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	29	NA
+58	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	18	NA
+59	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	49	NA
+60	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	7	NA
+61	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	35	NA
+62	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	11	NA
+63	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	49	NA
+64	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+65	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	16	NA
+66	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	9	NA
+67	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	25.02.2019	1	28.02.2019	1	0	alive	NA	NA	0	NA
+68	NA	1	NA	13.02.2019	22.02.2019	4	25.02.2019	4	26.02.2019	1	28.02.2019	1	0	alive	NA	NA	0	NA
+69	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+70	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+71	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+72	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+73	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+74	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+75	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+76	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+77	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+78	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+79	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+80	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+81	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+82	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+83	NA	21	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+84	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+85	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+86	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	NA	0	0	NA	NA	NA	0	wasp_not_found
+87	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+88	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+89	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+90	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+91	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+92	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+93	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+94	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+95	NA	34	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+96	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+97	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+98	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+99	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+100	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+101	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+102	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+103	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+104	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+105	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+106	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+107	NA	32	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+108	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+109	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	dead	NA	NA	0	NA
+110	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	4	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+111	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+112	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+113	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+114	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+115	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	2	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+116	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	3	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA
+117	NA	36	NA	14.02.2019	25.02.2019	4	28.02.2019	1	28.02.2019	1	04.03.2019	1	0	alive	NA	NA	0	NA

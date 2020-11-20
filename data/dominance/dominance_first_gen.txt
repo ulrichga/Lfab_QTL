@@ -1,0 +1,127 @@
+####################																												
+#	DATA INFO																											
+#	MScThesis Gabriel Ulrich on genetic architecture of counteradaptation to symbiont-conferred resistance																											
+#	Data sheet with information on colonies that were established to asses dominance relationships of the wasps counteradaptation. This sheet is about the first generation of wasps used in this experiment. Colonies consist of a plant with aphids on it to which Lysiphlebus wasps are added. Colonies were established by adding adult aphids to +/- 10 d old Vicia faba plants and leaving them on the plant for a few days (see dates in the data frame to reconstruct exact timing). After adult aphids were removed, a pair of wasps was added to the plant. Wasps were brought together in the tube ~30 minutes prior to adding them to the plant to facilitate mating. 																											
+#	Version Nr. 06-03-2020.																											
+####################																												
+#	VARIBALE NAMES																											
+#	colony_ID	colonies (i.e. plants with aphids) were numbered continuously after counting aphid nymphs. This number is their ID.																										
+#	batch	the experiment was split in 2 batches, which were time-shifted by 2 days. This was done to infest colonies fast after emergence of wasps and reduce the risk of wasps dying before infesting colonies																										
+#	treatment	this is the crossing scheme of the wasp pair that was released in the colony. R (resistant to defensive endosymbionts) refers to wasps originating from the strain evolved on Hamiltonella defensa (strain H76) infested aphid (Aphis fabae) clones. S (susceptible to defensive endosymbionts) refers to wasps  originating from the strain evolved on Hamiltonella defensa free aphid clones. Females are mentioned first and have two letters, as they are diploid. Males are second and have one letter as they are haploid. Example: if a resistant female is crossed with a susceptible male the treatment is RRxS																										
+#	geno_female	"As in ""treatment"" but names only the genotype of the female i.e. either SS or RR"																										
+#	geno_male	"As in ""treatment"" but names only the genotype of the male i.e. either S or R"																										
+#	strain_female	"As in ""geno_female"" but here RR is encoded as H76 (Hamiltonella strain found in the aphid clones wasps were reared on) and SS is encoded as H- (referring to hamiltonella free aphids)"																										
+#	strain_male	"As in ""geno_male"" but here R is encoded as H76 (Hamiltonella strain found in the aphid clones wasps were reared on) and S is encoded as H- (referring to hamiltonella free aphids)"																										
+#	n_nymphs	number of nymphs counted prior to adding wasps to colonies																										
+#	n_daughters	number of females that were found when counting offspring + those that were removed for establishing second generation colonies																										
+#	n_sons	number of males that were found when counting offspring + those that were removed for establishing second generation colonies																										
+#	n_mummies	number of mummies that were found when counting offspring																										
+#	n_mummies_unhatched	number of mummies that were found when counting offspring but did not show any sign of hatching (if the wasp was inside but sticking an organ out of the mummy, it was counted as hatched)																										
+#	n_mummies_removed	number of mummies that were removed before sealing the bag																										
+#	date_sown	sowing date of the plant, the colony was grown on																										
+#	date_aphids_added	date at which adult aphids were added to the colonies																										
+#	n_aphids_added	number of adult aphids that were added to the colonies (this was always 4)																										
+#	date_aphids_removed	date at which adult aphids were removed from the colonies																										
+#	n_aphids_removed	number of adult aphids that were removed from the colonies (the aim was to remove 4 but sometimes not all released adults were found)																										
+#	date_parasitoids_added	date at which parasitoids were added to the colonies (also corresponds to the date at which parasitoids were mated)																										
+#	date_parasitoids_removed	date at which parasitoids were removed from the colonies																										
+#	date_bag_sealed	date at which the bag with the colony was closed and let dry out for later counting of wasps																										
+#	wasps_found	number of wasps that were found in (& removed from) the colonies																										
+#	male_found	whether the male wasp was found in the tube (encoded as tube) or in the headspace of the plant (i.e. not in the tube encoded as plant). If the male was not found, this is not_found																										
+#	male_status	whether the male wasp was alive or dead																										
+#	female_found	whether thefemale wasp was found in the tube (encoded as tube) or in the headspace of the plant (i.e. not in the tube encoded as plant). If the female was not found, this is not_found																										
+#	female_status	whether the female wasp was alive or dead																										
+#	date_counting	date at which bags with dried wasps were counted																										
+#	notes	additional comments on aphid colony establishment and wasp infestation at the time the wasps were removed																										
+#	notes_II	additional comments on the colones at the time the bags were sealed for later counting of male and female wasps																										
+####################																												
+colony_ID	batch	treatment	geno_female	geno_male	strain_female	strain_male	n_nymphs	n_daughters	n_sons	n_mummies	n_mummies_unhatched	n_mummies_removed	date_sown	date_aphids_added	n_aphids_added	date_aphids_removed	n_aphids_removed	date_parasitoids_added	date_parasitoids_removed	date_bag_sealed	wasps_found	male_found	male_status	female_found	female_status	date_counting	notes	notes_2
+1	1	RRxR	RR	R	H76	H76	52	30	7	40	1	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	18.02.2019	plants_from_heidi	>20_mummies
+2	1	SSxS	SS	S	H-	H-	47	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	19.02.2019	plants_from_heidi	NA
+3	1	SSxR	SS	R	H-	H76	52	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	19.02.2019	plants_from_heidi	fungi
+4	1	SSxR	SS	R	H-	H76	63	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	tube	dead	19.02.2019	plants_from_heidi	NA
+5	1	RRxS	RR	S	H76	H-	60	26	17	47	4	5	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	19.02.2019	plants_from_heidi	>20_mummies
+6	1	SSxR	SS	R	H-	H76	46	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	19.02.2019	plants_from_heidi	fungi
+7	1	RRxR	RR	R	H76	H76	53	11	39	53	1	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	19.02.2019	plants_from_heidi	>20_mummier
+8	1	SSxS	SS	S	H-	H-	25	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	19.02.2019	plants_from_heidi	fungi
+9	1	RRxS	RR	S	H76	H-	34	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	19.02.2019	plants_from_heidi	NA
+10	1	SSxR	SS	R	H-	H76	50	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	19.02.2019	plants_from_heidi	fungi
+11	1	RRxR	RR	R	H76	H76	31	21	9	33	1	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	19.02.2019	plants_from_heidi	>20_mummies
+12	1	RRxS	RR	S	H76	H-	59	7	0	7	1	5	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	19.02.2019	plants_from_heidi	mummies_present
+13	1	SSxR	SS	R	H-	H76	44	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	mummies_present
+14	1	RRxS	RR	S	H76	H-	51	3	0	3	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+15	1	RRxR	RR	R	H76	H76	61	11	4	23	5	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	mummies_present
+16	1	SSxS	SS	S	H-	H-	56	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+17	1	RRxR	RR	R	H76	H76	45	26	2	28	0	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	>20_mummies
+18	1	SSxR	SS	R	H-	H76	52	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+19	1	RRxR	RR	R	H76	H76	35	17	6	25	2	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	mummies_present
+20	1	SSxR	SS	R	H-	H76	69	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+21	1	SSxS	SS	S	H-	H-	61	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+22	1	RRxS	RR	S	H76	H-	57	11	22	36	1	5	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	>20_mummies
+23	1	RRxS	RR	S	H76	H-	59	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	tube	alive	20.02.2019	plants_from_heidi	fungi
+24	1	RRxS	RR	S	H76	H-	48	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	tube	alive	20.02.2019	plants_from_heidi	NA
+25	1	RRxR	RR	R	H76	H76	46	5	5	10	0	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	mummies_present
+26	1	SSxS	SS	S	H-	H-	64	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	fungi
+27	1	SSxR	SS	R	H-	H76	50	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	fungi
+28	1	SSxR	SS	R	H-	H76	60	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	fungi
+29	1	RRxR	RR	R	H76	H76	57	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	tube	alive	20.02.2019	plants_from_heidi	NA
+30	1	RRxS	RR	S	H76	H-	58	24	7	33	2	5	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	>20_mummies
+31	1	SSxS	SS	S	H-	H-	28	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	tube	alive	20.02.2019	plants_from_heidi	NA
+32	1	SSxS	SS	S	H-	H-	61	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	fungi
+33	1	RRxR	RR	R	H76	H76	73	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	tube	alive	20.02.2019	plants_from_heidi	NA
+34	1	SSxR	SS	R	H-	H76	43	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+35	1	RRxS	RR	S	H76	H-	72	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+36	1	RRxS	RR	S	H76	H-	46	15	5	22	1	5	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	>=20_mummies
+37	1	RRxR	RR	R	H76	H76	52	18	13	33	2	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	>20_mummies
+38	1	RRxR	RR	R	H76	H76	59	13	7	22	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	tube	alive	plant	alive	20.02.2019	plants_from_heidi	mummies_present
+39	1	SSxS	SS	S	H-	H-	56	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	3	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	plant	alive	20.02.2019	plants_from_heidi	NA
+40	1	SSxS	SS	S	H-	H-	70	0	0	0	0	0	NA	26.01.2019	4	28.01.2019	4	28.01.2019	29.01.2019	08.02.2019	2	plant	alive	not_found	NA	20.02.2019	two_males_plants_from_heidi	NA
+41	2	SSxR	SS	R	H-	H76	35	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+42	2	RRxS	RR	S	H76	H-	49	28	14	43	1	5	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	>20_mummies
+43	2	RRxR	RR	R	H76	H76	37	4	1	5	1	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	mummies_present
+44	2	SSxS	SS	S	H-	H-	30	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+45	2	RRxR	RR	R	H76	H76	24	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	2	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	tube	alive	21.02.2019	NA	NA
+46	2	RRxR	RR	R	H76	H76	10	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	tube	alive	21.02.2019	NA	NA
+47	2	RRxS	RR	S	H76	H-	18	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+48	2	SSxS	SS	S	H-	H-	49	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	1	not_found	NA	tube	alive	21.02.2019	male_not_found	NA
+49	2	RRxS	RR	S	H76	H-	27	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	2	30.01.2019	31.01.2019	10.02.2019	2	tube	dead	plant	alive	21.02.2019	NA	NA
+50	2	RRxR	RR	R	H76	H76	12	1	1	2	0	0	18.01.2019	28.01.2019	4	30.01.2019	1	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	mummies_present
+51	2	RRxS	RR	S	H76	H-	39	8	9	21	4	5	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	tube	alive	21.02.2019	NA	>20_mummies_fungi
+52	2	SSxR	SS	R	H-	H76	41	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	NA
+53	2	SSxS	SS	S	H-	H-	27	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	tube	alive	21.02.2019	NA	NA
+54	2	RRxS	RR	S	H76	H-	16	3	2	6	1	3	18.01.2019	28.01.2019	4	30.01.2019	2	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	tube	alive	21.02.2019	NA	mummies_present
+55	2	SSxR	SS	R	H-	H76	45	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	fungi
+56	2	RRxS	RR	S	H76	H-	37	10	7	17	0	3	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	mummies_present
+57	2	SSxS	SS	S	H-	H-	52	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+58	2	RRxS	RR	S	H76	H-	38	5	6	14	2	3	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	mummies_present
+59	2	NONE	NONE	NONE	NONE	NONE	18	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	2	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+60	2	NONE	NONE	NONE	NONE	NONE	11	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	2	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+61	2	RRxS	RR	S	H76	H-	36	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	tube	alive	21.02.2019	NA	NA
+62	2	RRxR	RR	R	H76	H76	44	19	6	27	1	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	>=20_mummies
+63	2	SSxS	SS	S	H-	H-	24	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+64	2	RRxR	RR	R	H76	H76	20	8	5	14	1	0	18.01.2019	28.01.2019	4	30.01.2019	2	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	mummies_present
+65	2	RRxR	RR	R	H76	H76	55	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+66	2	RRxS	RR	S	H76	H-	24	8	4	14	2	3	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	mummies_present
+67	2	SSxS	SS	S	H-	H-	39	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+68	2	RRxR	RR	R	H76	H76	39	6	1	9	2	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	1	not_found	NA	plant	alive	21.02.2019	male_not_found	mummies_present
+69	2	SSxR	SS	R	H-	H76	43	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+70	2	RRxR	RR	R	H76	H76	32	17	9	26	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	>20_mummies
+71	2	SSxR	SS	R	H-	H76	34	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	2	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	NA
+72	2	SSxS	SS	S	H-	H-	20	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	3	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+73	2	NONE	NONE	NONE	NONE	NONE	33	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+74	2	SSxR	SS	R	H-	H76	27	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	tube	alive	plant	alive	21.02.2019	NA	NA
+75	2	RRxS	RR	S	H76	H-	50	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	NA
+76	2	RRxR	RR	R	H76	H76	22	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	tube	alive	21.02.2019	NA	NA
+77	2	SSxR	SS	R	H-	H76	33	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	1	tube	alive	not_found	NA	21.02.2019	female_not_found	NA
+78	2	NONE	NONE	NONE	NONE	NONE	24	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+79	2	SSxS	SS	S	H-	H-	28	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	1	tube	alive	not_found	NA	21.02.2019	female_not_found	NA
+80	2	NONE	NONE	NONE	NONE	NONE	29	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+81	2	NONE	NONE	NONE	NONE	NONE	33	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+82	2	NONE	NONE	NONE	NONE	NONE	23	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	1	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+83	2	NONE	NONE	NONE	NONE	NONE	30	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+84	2	NONE	NONE	NONE	NONE	NONE	30	NA	NA	NA	NA	NA	18.01.2019	28.01.2019	4	30.01.2019	3	NA	NA	NA	NA	NA	NA	NA	NA	21.02.2019	excluded	NA
+85	2	RRxS	RR	S	H76	H-	50	2	2	7	3	3	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	mummies_present
+86	2	SSxS	SS	S	H-	H-	57	0	0	0	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	tube	alive	21.02.2019	NA	NA
+87	2	RRxR	RR	R	H76	H76	27	0	9	9	0	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	1	not_found	NA	tube	dead	21.02.2019	male_not_found	mummies_present
+88	2	RRxR	RR	R	H76	H76	43	20	8	30	3	0	18.01.2019	28.01.2019	4	30.01.2019	4	30.01.2019	31.01.2019	10.02.2019	2	plant	alive	plant	alive	21.02.2019	NA	>20_mummies
+																												
