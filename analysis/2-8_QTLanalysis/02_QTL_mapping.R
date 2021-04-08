@@ -2,6 +2,9 @@
 #
 # Script for conducting QTL mapping
 #
+# In the fisrt part, the phenotype are the residuals of the zero-inflation Poisson regression
+# In the second part, the phenotype is a binary response where 1 = offspring was observed and 0 = no offspring observed.
+#
 ##############################
 
 # Set a seed for reproducibility (permutation tests and genotype simulations are random processes)
@@ -26,6 +29,8 @@ qtlin <- convert2riself(qtlin)
 
 # Calculate conditional genotype probabilities with a step size of 0.1 cM.
 qtlin <- calc.genoprob(qtlin, step=.1, error.prob=genoerror)
+
+# First part with residuals as phenotype ##################################################################################################
 
 # Perform genome scan with a single-QTL nonparametric model using the EM algorithm.
 qtlin_em <- scanone(qtlin, model="np")
@@ -105,8 +110,8 @@ arrows(x, y, x+100, y, angle=90, length=0.05, code=3)
 text(x+50, y, "100 cM", pos=1)
 dev.off()
 
-# Repeat plotting but as SVG with altered appearance
-svg("./results/QTLanalysis/lod_LGall_bayesint_lab1.5_axis1.25_marmod_format5.svg", width = 10, height=5)
+# Repeat plotting but with altered appearance
+pdf("./results/QTLanalysis/lod_LGall_bayesint_lab1.5_axis1.25_marmod_format5.pdf", width = 10, height=5)
 opar <- par(cex.lab=1.5, cex.axis=1.25, mar=c(5.1, 5.1, 0.1, 0.1))
 # Construct the plot without content
 plot(qtlin_em, ylab="LOD score", xlab="Linkage group", type="n", incl.markers = FALSE)
@@ -179,3 +184,106 @@ names(marker_summary) <- c("scaffold", "position_bp", "linkage_group", "position
 marker_summary[,"linkage_group"] <- as.numeric(marker_summary[,"linkage_group"])
 # Output the summary table
 write.table(marker_summary, "./results/QTLanalysis/QTL_table.txt", row.names=FALSE, sep="\t")
+
+# Second part with binary response as phenotype ##################################################################################################
+
+# Perform genome scan with a single-QTL binomial model on the binary phenotype.
+qtlin_bin <- scanone(qtlin, model="binary", pheno.col=2)
+
+# Determine a significance threshold using a permutation test
+qtlin_bin_perm <- scanone(qtlin, model="binary", pheno.col=2, n.perm=1000, verbose=TRUE)
+sigthres_bin_0.05 <- summary(qtlin_bin_perm, alpha=c(0.05))[1]
+
+# Plot all chromosomes with significance threshold as pdf file
+pdf("./results/QTLanalysis/lod_LGall_binary.pdf", width = 14)
+plot(qtlin_bin, col="#00441B", ylab="LOD score", xlab="Linkage group", ylim=c(0,sigthres_bin_0.05 + 0.2))
+abline(h=sigthres_bin_0.05)
+dev.off()
+
+# Plot a comparison of binary and residual phenotype lod scores
+pdf("./results/QTLanalysis/lod_LGall_em_and_binary.pdf", width = 14)
+plot(qtlin_em, col="#08306B", ylab="LOD score", xlab="Linkage group")
+abline(h=sigthres_0.05, col="#08306B")
+plot(qtlin_bin, col="#00441B", ylab="LOD score", xlab="Linkage group", add=TRUE)
+abline(h=sigthres_bin_0.05, col="#00441B")
+dev.off()
+
+# Plot all chromosomes in the same format as done for the residuals and export it as a pdf file
+pdf("./results/QTLanalysis/lod_LGall_binary.pdf", width = 14)
+# Construct the plot without content
+plot(qtlin_em, ylab="LOD score", xlab="Linkage group", type="n", incl.markers = FALSE)
+# Calculate offset for each chromosome as a vector. this vector contains the starting point of each chromosome
+# Offset is (spacer)*(chromosome_id-1)+sum_of_previous_chr_sizes
+spacer <- 25
+offset <- rep(NA, nchr(qtlin))
+chr_sizes <- c()
+for(i in 1:nchr(qtlin)){
+  chr_sizes <- c(chr_sizes, qtlin_em[qtlin_em[,"pos"]==max(qtlin_em[as.numeric(qtlin_em$chr) == i,"pos"]),"pos"])
+}
+for (i in 1:nchr(qtlin)){
+  if(i==1){
+    offset[i] <- 0
+  }
+  if(i>1){
+    sum_of_previous_chr_sizes <- sum(chr_sizes[0:(i-1)])
+    offset[i] <- spacer*(i-1)+sum_of_previous_chr_sizes
+  }
+}
+# overlay the lod-scores and sig-threshold
+plot(qtlin_bin, col="#00441B", add=TRUE)
+box()
+abline(h=sigthres_bin_0.05)
+# include marker positions
+realmarkers <- qtlin_em[grep("tig", row.names(qtlin_em)),]
+markerpos_plot <- realmarkers$pos + offset[as.numeric(realmarkers$chr)]
+rug(markerpos_plot)
+# Add a "legend" to indicate map scale
+x <- (offset[6]+chr_sizes[6]/2)-100
+y <- 3.5
+arrows(x, y, x+100, y, angle=90, length=0.05, code=3)
+text(x+50, y, "100 cM", pos=1)
+dev.off()
+
+# Repeat plotting but with altered appearance
+pdf("./results/QTLanalysis/lod_LGall_binary_lab1.5_axis1.25_marmod_format5.pdf", width = 10, height=5)
+opar <- par(cex.lab=1.5, cex.axis=1.25, mar=c(5.1, 5.1, 0.1, 0.1))
+# Construct the plot without content
+plot(qtlin_em, ylab="LOD score", xlab="Linkage group", type="n", incl.markers = FALSE)
+# Calculate offset for each chromosome as a vector. this vector contains the starting point of each chromosome
+# Offset is (spacer)*(chromosome_id-1)+sum_of_previous_chr_sizes
+spacer <- 25
+offset <- rep(NA, nchr(qtlin))
+chr_sizes <- c()
+for(i in 1:nchr(qtlin)){
+  chr_sizes <- c(chr_sizes, qtlin_em[qtlin_em[,"pos"]==max(qtlin_em[as.numeric(qtlin_em$chr) == i,"pos"]),"pos"])
+}
+for (i in 1:nchr(qtlin)){
+  if(i==1){
+    offset[i] <- 0
+  }
+  if(i>1){
+    sum_of_previous_chr_sizes <- sum(chr_sizes[0:(i-1)])
+    offset[i] <- spacer*(i-1)+sum_of_previous_chr_sizes
+  }
+}
+# overlay the lod-scores and sig-threshold
+plot(qtlin_bin, col="#00441B", add=TRUE)
+box()
+abline(h=sigthres_bin_0.05, lty="dotted")
+# include marker positions
+realmarkers <- qtlin_em[grep("tig", row.names(qtlin_em)),]
+markerpos_plot <- realmarkers$pos + offset[as.numeric(realmarkers$chr)]
+rug(markerpos_plot)
+# Add a "legend" to indicate map scale
+x <- (offset[6]+chr_sizes[6]/2)-100
+y <- 3.5
+arrows(x, y, x+100, y, angle=90, length=0.05, code=3)
+text(x+50, y, "100 cM", pos=1, cex=1.25)
+dev.off()
+par(opar)
+
+# Get positions of the peak LOD for each chromosome
+summary(qtlin_bin, perms=qtlin_bin_perm, alpha=1, pvalues = T) # Peak: c2.loc20.6 | chr 2 | cM 20.6 | LOD 1.733 | p-value 0.537
+
+# Inspect the peak (+- 2 cM)
+qtlin_bin[qtlin_bin[,"chr"]==2 & qtlin_bin[,"pos"]>=18.6 & qtlin_bin[,"pos"]<=22.6,] # Nearest flanking marker: tig00000002_832835 | chr 2 | cM 19.6 | LOD 1.621

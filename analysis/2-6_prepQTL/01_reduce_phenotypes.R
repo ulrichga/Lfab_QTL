@@ -115,6 +115,9 @@ pheno <- rbind(pheno, repdf)
 # Sort by F2_father identity
 pheno <- pheno[order(as.numeric(sapply(pheno$F2_father, FUN=function(x){strsplit(x, "_")[[1]][2]}))),]
 
+# Add a binary variable that indicates whether offspring occurred (binary_offspring)
+pheno$binary_offspring <- as.numeric(pheno$n_offspring > 0)
+
 # Add a variable that indicates whether an entry is made from merging observations or not
 pheno$is_merged <- as.factor(pheno$F2_father %in% duplicates)
 levels(pheno$is_merged) <- c("n", "y")

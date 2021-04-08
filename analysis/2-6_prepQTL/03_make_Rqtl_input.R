@@ -21,8 +21,9 @@ for(i in 1:ncol(MSTinput)){
   MSTinput[,i] <- as.character(MSTinput[,i])
 }
 str(pheno)
-pheno$F2_father <- as.character(pheno$F2_father)
-pheno$residuals <- as.character(pheno$residuals)
+for(i in 1:ncol(pheno)){
+  pheno[,i] <- as.character(pheno[,i])
+}
 
 # Remove markers from MSTinput that were excluded during linkage mapping
 # Make a vector of markers in the linkage map
@@ -62,19 +63,20 @@ for(i in 1:ncol(genotypes)){
 # if the phenotype is unknown, enter NA.
 
 # Extract the individual names from genotypes
-geno_ind <- row.names(genotypes)[-1:-3]
+geno_ind <- row.names(genotypes)[-c(1:3)]
 
-# For each entry in geno_ind create an entry in a new phenotypes data frame.
-phenotypes <- data.frame(F2_father=rep("", 3), phenotype=rep("", 3)) # Create a phenotypes data frame, consisting of 3 empty lines
-for(i in geno_ind){ # For each genotyped individual name
-  F2_father <- i # Write the name to F2_father
-  if(i %in% pheno$F2_father){ # If this name has an entry in the pheno(types) data frame...
-    phenotype <- pheno[pheno[,"F2_father"]==i,"residuals"] # ...save the entry as phenotype
+# Create a phenotypes data frame, which starts with 3 empty lines and will be followed by phenotypes for all genotyped individuals
+phenotypes <- data.frame(F2_father = rep("", 3), residuals = rep("", 3), binary_offspring = rep("", 3))
+# Loop through the names of genotyped individuals
+for(F2_father in geno_ind){ # For each genotyped individual name (i.e. F2_father)
+  if(F2_father %in% pheno[,"F2_father"]){ # If this name has an entry in the pheno(types) data frame...
+    phenotype <- pheno[pheno[,"F2_father"] == F2_father,] # ...save the entry as phenotype
   }
   else{ # Otherwise...
-    phenotype <- NA # ...save NA as phenotype
+    phenotype <- data.frame(F2_father = F2_father, residuals = NA, binary_offspring=NA)# ...save NA as phenotype (using the same column names as in pheno)
   }
-  phenotypes <- rbind(phenotypes, data.frame(F2_father, phenotype)) # Combine the variables created above with the phenotypes data frame
+  # Append the "phenotype" variables created above in a "phenotypes" data frame
+  phenotypes <- rbind(phenotypes, phenotype) # Attach the phenotype line at the end of phenotypes
 }
 
 # Merge the phenotypes and genotypes data frames to create a data frame of the appropriate input format for R/qtl
@@ -85,8 +87,9 @@ for(i in 1:ncol(Rqtlin)){
   Rqtlin[,i] <- as.character(Rqtlin[,i])
 }
 
-# Enter a name for the phenotype in Rqtlin
-Rqtlin[1,2] <- "pheno"
+# Enter names for the phenotypes in Rqtlin
+Rqtlin[1,2] <- "residuals"
+Rqtlin[1,3] <- "binary_offspring"
 
 # Remove the F2_father entry from Rqtlin
 Rqtlin <- Rqtlin[,-1]

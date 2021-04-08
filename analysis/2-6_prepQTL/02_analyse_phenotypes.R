@@ -68,7 +68,7 @@ lines(10:75, predict(reduced, newdata=newdata_bdo), col="black", lty="dotted") #
 dev.off()
 
 # Reduce the phenotypes data frame to only F2_father and residuals
-pheno <- pheno[,c("F2_father", "residuals")]
+pheno <- pheno[,c("F2_father", "residuals", "binary_offspring")]
 pheno
 
 # Save the new phenotypes data frame
