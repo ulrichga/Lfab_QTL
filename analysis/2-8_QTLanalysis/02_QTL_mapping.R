@@ -38,6 +38,7 @@ qtlin_em <- scanone(qtlin, model="np")
 # Determine a significance threshold using a permutation test
 qtlin_perm <- scanone(qtlin, model="np", n.perm=1000, verbose=TRUE)
 sigthres_0.05 <- summary(qtlin_perm, alpha=c(0.05))[1]
+cat("Significance threshold at alpha = 5% for the corrected count model is", sigthres_0.05)
 
 # Plot all chromosomes with significance threshold as pdf file
 pdf("./results/QTLanalysis/lod_LGall.pdf", width = 14)
@@ -193,6 +194,7 @@ qtlin_bin <- scanone(qtlin, model="binary", pheno.col=2)
 # Determine a significance threshold using a permutation test
 qtlin_bin_perm <- scanone(qtlin, model="binary", pheno.col=2, n.perm=1000, verbose=TRUE)
 sigthres_bin_0.05 <- summary(qtlin_bin_perm, alpha=c(0.05))[1]
+cat("Significance threshold at alpha = 5% for the binary model is", sigthres_bin_0.05)
 
 # Plot all chromosomes with significance threshold as pdf file
 pdf("./results/QTLanalysis/lod_LGall_binary.pdf", width = 14)
